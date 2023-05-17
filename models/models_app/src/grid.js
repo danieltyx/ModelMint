@@ -1,22 +1,42 @@
-import React from "react";
+import React, { useState } from 'react';
+import {GrAdd} from 'react-icons/gr';
 import './App.css';
-
-export default function Grid() {
-    const data = [
-        { title: 'GPT-3', description: 'GPT-3 is an autoregressive language model that uses deep learning to produce human-like text.' },
-        { title: 'GPT-4', description: 'GPT-4 is a larger and more advanced version of GPT-3 that can generate even more sophisticated text.' },
-        { title: 'ChatGPT', description: 'ChatGPT is a special version of the GPT model that is designed for generating conversational responses.' },
-        // Add more items as needed
-      ];
-    
-      return (
-        <div className="grid-container">
-          {data.map((item, index) => (
-            <div className="grid-item" key={index}>
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
-            </div>
-          ))}
+function App() {
+    const initialData = [
+      { id: 1, title: 'GPT-3', description: 'GPT-3 is an autoregressive language model that uses deep learning to produce human-like text.' },
+      { id: 2, title: 'GPT-4', description: 'GPT-4 is a larger and more advanced version of GPT-3 that can generate even more sophisticated text.' },
+      { id: 3, title: 'ChatGPT', description: 'ChatGPT is a special version of the GPT model that is designed for generating conversational responses.' },
+      // Add more items as needed
+    ];
+    const [data, setData] = useState(initialData);
+    const [nextId, setNextId] = useState(4);
+  
+    const addNewGridItem = () => {
+      const title = prompt('Enter title for new grid item:');
+      const description = prompt('Enter description for new grid item:');
+      setData([...data, { id: nextId, title, description }]);
+      setNextId(nextId + 1);
+    };
+  
+    const deleteGridItem = (id) => {
+      setData(data.filter(item => item.id !== id));
+    };
+  
+    return (
+      <div className="grid-container">
+        {data.map((item) => (
+          <div className="grid-item" key={item.id}>
+            <button className="delete-button" onClick={() => deleteGridItem(item.id)}>X</button>
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
+          </div>
+        ))}
+        <div className="grid-item add-new" onClick={addNewGridItem}>
+          <h2><GrAdd></GrAdd></h2>
+          <p>Click here to train a new fine-tune model</p>
         </div>
-      );
-}
+      </div>
+    );
+  }
+  
+  export default App;

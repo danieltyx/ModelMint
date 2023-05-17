@@ -4,6 +4,8 @@ import Grid from './grid.js'
 import Navbar from './Navbar.js';
 import SignUpLogin from './SignUpLogin.js';
 import WriteToFirestore from './WriteToFirestore.js';
+import firebase from "./firebaseConfig";
+import 'firebase/firestore';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -11,10 +13,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <div>
-    {/* <Navbar/>
+    <Navbar/>
     
-    <Grid/> */}
-<WriteToFirestore/>
+    <Grid/>
+{/* <WriteToFirestore/> */}
 {/* <SignUpLogin/> */}
   </div>
 );

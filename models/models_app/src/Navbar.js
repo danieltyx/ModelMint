@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import { FaCog } from 'react-icons/fa';
+import WriteToFirestore from './WriteToFirestore';
 
 // const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -8,7 +9,13 @@ const Navbar = () => {
     const [inputValue, setInputValue] = useState('');
   
     const handleOpen = () => setModalOpen(true);
-    const handleClose = () => setModalOpen(false);
+    function handleClose()
+    {
+
+      setModalOpen(false);
+      WriteToFirestore('xxsxx','user_id',{'api':inputValue});
+
+    } 
     const handleChange = (e) => setInputValue(e.target.value);
 
     function handleClick() {

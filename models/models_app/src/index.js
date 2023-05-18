@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import ReactDOM from 'react-dom/client'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'; // Import the BrowserRouter, Switch, and Route components
 import Grid from './grid.js'
 import Navbar from './Navbar.js';
 import SignUpLogin from './SignUpLogin.js';
@@ -18,6 +19,8 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { Walletlogin } from './rainbowlogin.js';
 import { RainbowKitSiweNextAuthProvider } from '@rainbow-me/rainbowkit-siwe-next-auth';
+import NewPage from './marketplace/Newpage.js'; // Import the NewPage component
+
 
 const { chains, publicClient } = configureChains(
   [mainnet, polygon, optimism, arbitrum],
@@ -45,20 +48,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <div>
-
-{/* <WagmiConfig config={wagmiConfig}>
-
-      <RainbowKitProvider chains={chains}> */}
-
-    {/* <Web3authfunction/> */}
-{/* <Walletlogin/> */}
+  <BrowserRouter> 
      <Navbar/>
-    <Grid/> 
-{/* <WriteToFirestore/> */}
-{/* <SignUpLogin/> */}
-
-{/* </RainbowKitProvider>
-    </WagmiConfig> */}
+     <Switch> {/* Use the Switch component to render the correct page based on the URL */}
+        <Route exact path="/" component={Grid}/> {/* Set up a route for the Grid component */}
+        <Route path="/marketplace" component={NewPage}/> {/* Set up a route for the NewPage component */}
+      </Switch>
+      </BrowserRouter>
   </div>
 );
 

@@ -22,6 +22,11 @@ import { RainbowKitSiweNextAuthProvider } from '@rainbow-me/rainbowkit-siwe-next
 import NewPage from './marketplace/Newpage.js'; // Import the NewPage component
 
 
+import classes from './App.module.css';
+import resets from './components/_resets.module.css';
+import { ModelCard_statusDefault } from './components/ModelCard_statusDefault/ModelCard_statusDefault.tsx';
+
+
 const { chains, publicClient } = configureChains(
   [mainnet, polygon, optimism, arbitrum],
   [
@@ -47,14 +52,18 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 root.render(
-  <div>
-  <BrowserRouter> 
+
+  
+ 
+<div>
+<BrowserRouter> 
      <Navbar/>
      <Switch> {/* Use the Switch component to render the correct page based on the URL */}
         <Route exact path="/" component={Grid}/> {/* Set up a route for the Grid component */}
         <Route path="/marketplace" component={NewPage}/> {/* Set up a route for the NewPage component */}
       </Switch>
       </BrowserRouter>
-  </div>
+      </div>
+
 );
 

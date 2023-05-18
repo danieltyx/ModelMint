@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import {GrAdd} from 'react-icons/gr';
 import './App.css';
+
+import classes from './App.module.css';
+import resets from './components/_resets.module.css';
+import { ModelCard_statusDefault } from './components/ModelCard_statusDefault/ModelCard_statusDefault.tsx';
+
+
 function App() {
     const initialData = [
       { id: 1, title: 'GPT-3', description: 'GPT-3 is an autoregressive language model that uses deep learning to produce human-like text.' },
@@ -23,6 +29,7 @@ function App() {
     };
   
     return (
+      <div>
       <div className="grid-container">
         {data.map((item) => (
           <div className="grid-item" key={item.id}>
@@ -35,7 +42,18 @@ function App() {
           <h2><GrAdd></GrAdd></h2>
           <p>Click here to train a new fine-tune model</p>
         </div>
+    
+
       </div>
+      {/* add some space */}
+      <div style={{ height: '50px' }}></div>
+      {/* limit the width */}
+ 
+        <div style={{ width: '350px' }} className={`${resets.clapyResets} ${classes.root}`}>
+        <ModelCard_statusDefault />
+      </div>
+</div>
+      
     );
   }
   

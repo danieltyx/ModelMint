@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import { FaCog } from 'react-icons/fa';
 import WriteToFirestore from './WriteToFirestore';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 // const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -43,7 +44,9 @@ const Navbar = () => {
       )}
         
       </div>
-
+      <div className='connect-button'>
+       <ConnectButton />
+        </div>
     </nav>
   );
 };

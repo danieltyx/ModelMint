@@ -84,6 +84,7 @@ body {
   align-items: center;
   width: 80px; /* Adjust the width as needed */
   height: 40px; /* Adjust the height as needed */
+  order: 1
 }
 
 
@@ -171,3 +172,9 @@ body {
     padding: 5px 10px;
   }
   
+  .connect-button {
+  /* make the button stay right with some margin */
+  margin-left: auto;
+
+
+  }

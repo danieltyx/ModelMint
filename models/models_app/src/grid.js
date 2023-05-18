@@ -30,28 +30,32 @@ function App() {
   
     return (
       <div>
-      <div className="grid-container">
+      <div className="grid-container" >
         {data.map((item) => (
+            <div>
+              
+
+              
+              <div style={{ height: '50px' }}></div>
+        <div style={{ width: '350px' }} className={`${resets.clapyResets} ${classes.root}`}>
+        <ModelCard_statusDefault />
+      </div>  
+{/* 
           <div className="grid-item" key={item.id}>
             <button className="delete-button" onClick={() => deleteGridItem(item.id)}>X</button>
             <h2>{item.title}</h2>
             <p>{item.description}</p>
+          </div> */}
+
           </div>
         ))}
         <div className="grid-item add-new" onClick={addNewGridItem}>
           <h2><GrAdd></GrAdd></h2>
           <p>Click here to train a new fine-tune model</p>
         </div>
-    
-
+  
       </div>
-      {/* add some space */}
-      <div style={{ height: '50px' }}></div>
-      {/* limit the width */}
- 
-        <div style={{ width: '350px' }} className={`${resets.clapyResets} ${classes.root}`}>
-        <ModelCard_statusDefault />
-      </div>
+   
 </div>
       
     );

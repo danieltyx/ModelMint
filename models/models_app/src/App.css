@@ -5,16 +5,29 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(to right, #ff9966, #ff5e62);
+    background: #0D0E0F;
     font-family: 'Arial', sans-serif;
   }
   
   .grid-container {
+    position: absolute;
+    left: 6%;
+    top: 20%;
+
+
+
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 20px;
+    grid-gap: 80px;
     width: 90%;
     max-width: 1000px;
+    /* make it 10px space in vertical space */
+    /* make the code adaptable */
+
+    grid-auto-rows: 150px;
+    grid-auto-flow: dense;
+
+
   }
   
 
@@ -210,4 +223,11 @@ body {
     color: #333;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     font-family: monospace;
+  }
+
+  .div{
+  /* make it no spacing  */
+  margin: 0;
+  padding: 0;
+
   }

@@ -4,6 +4,7 @@ import WriteToFirestore from './WriteToFirestore';
 // import { useRainbow } from '@rainbow-me/rainbow';
 import { ConnectButton,getDefaultWallets } from '@rainbow-me/rainbowkit';
 import MetaMaskSDK from '@metamask/sdk';
+import { Link } from 'react-router-dom'; // Import the Link component
 
 // const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -74,6 +75,9 @@ const Navbar = () => {
       )}
         
       </div>
+      <Link to="/marketplace">Marketplace</Link> {/* Use the Link component to navigate to the marketplace page */}
+<Link to="/">Models</Link>
+
       <div className="wallet-address-container">
       {walletAddress == 'null' ?  <button onClick={handleConnect}>Connect to MetaMask</button>:<h1>{walletAddress}</h1>}
      </div>
@@ -85,6 +89,8 @@ const Navbar = () => {
         handleConnect(data)
        }}/>
         </div> */}
+
+
     </nav>
   );
 };

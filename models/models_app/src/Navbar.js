@@ -1,11 +1,37 @@
 import React,{useState} from 'react';
 import { FaCog } from 'react-icons/fa';
 import WriteToFirestore from './WriteToFirestore';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+// import { useRainbow } from '@rainbow-me/rainbow';
+import { ConnectButton,getDefaultWallets } from '@rainbow-me/rainbowkit';
+import MetaMaskSDK from '@metamask/sdk';
 
 // const [modalIsOpen, setIsOpen] = useState(false);
 
 const Navbar = () => {
+  const [walletAddress,setWalletAddress] = useState('null');
+  const MMSDK = new MetaMaskSDK();
+  const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
+
+    function handleConnect()
+    {
+      window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] })
+      .then(() => {
+        console.log('Wallet connected successfully.');
+        setWalletAddress(window.ethereum.selectedAddress);
+        console.log(window.ethereum.isConnected());
+        WriteToFirestore('Users',walletAddress,{'created_time':new Date().toLocaleTimeString()});
+      })
+      .catch((error) => {
+        console.error('Failed to connect wallet:', error);
+      });
+    }
+
+    function handleDisconnect() {
+      window.ethereum.on('disconnect', (error) => {
+        console.log('Wallet disconnected successfully.');
+      });
+    }
+
     const [modalOpen, setModalOpen] = useState(false);
     const [inputValue, setInputValue] = useState('');
   
@@ -44,9 +70,17 @@ const Navbar = () => {
       )}
         
       </div>
-      <div className='connect-button'>
-       <ConnectButton />
-        </div>
+      <div className="wallet-address-container">
+      {walletAddress == 'null' ?  <button onClick={handleConnect}>Connect to MetaMask</button>:<h1>{walletAddress}</h1>}
+     </div>
+      {/* <button onClick={handleDisconnect}>Disconnect</button> */}
+      {/* <div className='connect-button'>
+       <ConnectButton onClick={(data) => {
+        // console.log('accountStatus')  
+        // console.log(accountStatus)
+        handleConnect(data)
+       }}/>
+        </div> */}
     </nav>
   );
 };

@@ -17,7 +17,7 @@ import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { Walletlogin } from './rainbowlogin.js';
-
+import { RainbowKitSiweNextAuthProvider } from '@rainbow-me/rainbowkit-siwe-next-auth';
 
 const { chains, publicClient } = configureChains(
   [mainnet, polygon, optimism, arbitrum],
@@ -46,8 +46,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <div>
 
-<WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains}>
+{/* <WagmiConfig config={wagmiConfig}>
+
+      <RainbowKitProvider chains={chains}> */}
 
     {/* <Web3authfunction/> */}
 {/* <Walletlogin/> */}
@@ -56,8 +57,8 @@ root.render(
 {/* <WriteToFirestore/> */}
 {/* <SignUpLogin/> */}
 
-</RainbowKitProvider>
-    </WagmiConfig>
+{/* </RainbowKitProvider>
+    </WagmiConfig> */}
   </div>
 );
 

@@ -32,7 +32,7 @@
     'Liberation Sans', sans-serif;
   position: absolute;
   left: 22px;
-  bottom: 25px;
+  bottom: 10px;
   width: 276px;
   height: min-content;
   flex-direction: column;
@@ -95,4 +95,9 @@
   height: min-content;
   white-space: nowrap;
   flex-direction: column;
+}
+.modelImage {
+  width: 100px;
+  height: 100px;
+  margin-left: 10px; /* add 10 pixels of margin to the left of the image */
 }

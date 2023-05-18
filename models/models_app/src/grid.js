@@ -9,9 +9,10 @@ import { ModelCard_statusDefault } from './components/ModelCard_statusDefault/Mo
 
 function App() {
     const initialData = [
-      { id: 1, title: 'GPT-3', description: 'GPT-3 is an autoregressive language model that uses deep learning to produce human-like text.' },
-      { id: 2, title: 'GPT-4', description: 'GPT-4 is a larger and more advanced version of GPT-3 that can generate even more sophisticated text.' },
-      { id: 3, title: 'ChatGPT', description: 'ChatGPT is a special version of the GPT model that is designed for generating conversational responses.' },
+      { id: 1, title: 'GPT-3', description: 'GPT-3 is an autoregressive language model that uses deep learning to produce human-like text.' ,modelImage:'image-a'},
+      { id: 2, title: 'GPT-4', description: 'GPT-4 is a larger and more advanced version of GPT-3 that can generate even more sophisticated text.',modelImage :'image-b' },
+      { id: 3, title: 'ChatGPT', description: 'ChatGPT is a special version of the GPT model that is designed for generating conversational responses.' ,modelImage:'image-c'},
+      { id: 3, title: 'BSGPT', description: 'BSGPT is purely BS' ,modelImage:'image-d'},
       // Add more items as needed
     ];
     const [data, setData] = useState(initialData);
@@ -38,7 +39,8 @@ function App() {
               
               <div style={{ height: '50px' }}></div>
         <div style={{ width: '350px' }} className={`${resets.clapyResets} ${classes.root}`}>
-        <ModelCard_statusDefault />
+        <ModelCard_statusDefault title={item.title} description={item.description} modelImage={item.modelImage}/>
+  
       </div>  
 {/* 
           <div className="grid-item" key={item.id}>

@@ -19,7 +19,11 @@ const Navbar = () => {
         console.log('Wallet connected successfully.');
         setWalletAddress(window.ethereum.selectedAddress);
         console.log(window.ethereum.isConnected());
-        WriteToFirestore('Users',walletAddress,{'created_time':new Date().toLocaleTimeString()});
+        console.log(walletAddress)
+        console.log(window.ethereum.selectedAddress)
+       
+      }).then(() => {
+        WriteToFirestore('Users',window.ethereum.selectedAddress,{'created_time':new Date().toLocaleTimeString()});
       })
       .catch((error) => {
         console.error('Failed to connect wallet:', error);

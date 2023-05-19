@@ -19,3 +19,5 @@ const Frame10Icon = (props: SVGProps<SVGSVGElement>) => (
 
 const Memo = memo(Frame10Icon);
 export { Memo as Frame10Icon };
+
+

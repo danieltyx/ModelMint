@@ -20,11 +20,9 @@ import { publicProvider } from 'wagmi/providers/public';
 import { Walletlogin } from './rainbowlogin.js';
 import { RainbowKitSiweNextAuthProvider } from '@rainbow-me/rainbowkit-siwe-next-auth';
 import NewPage from './marketplace/Newpage.js'; // Import the NewPage component
-
-
-import classes from './App.module.css';
-import resets from './components/_resets.module.css';
-import { ModelCard_statusDefault } from './components/ModelCard_statusDefault/ModelCard_statusDefault.tsx';
+import NewModel from './Newmodel.js';
+import "@fontsource/red-rose"
+import ModelMainPage from './ModelMainPage.js';
 
 
 const { chains, publicClient } = configureChains(
@@ -59,7 +57,7 @@ root.render(
 <BrowserRouter> 
      <Navbar/>
      <Switch> {/* Use the Switch component to render the correct page based on the URL */}
-        <Route exact path="/" component={Grid}/> {/* Set up a route for the Grid component */}
+        <Route exact path="/" component={ModelMainPage} /> {/* Set up a route for the Grid component */}
         <Route path="/marketplace" component={NewPage}/> {/* Set up a route for the NewPage component */}
       </Switch>
       </BrowserRouter>

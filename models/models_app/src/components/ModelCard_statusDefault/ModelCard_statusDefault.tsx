@@ -11,10 +11,14 @@ import image_c from './model_images/c.jpg';
 import image_d from './model_images/d.jpg';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import deleteIcon from './icons/delete.png';
+import editIcon from './icons/edit.png';
+import mintIcon from './icons/mint.png';
 
 
 import { ModelNameLogo_modelVariant2 } from './ModelNameLogo_modelVariant2/ModelNameLogo_modelVariant2.tsx';
 import React from 'react';
+import { on } from 'process';
 interface Props {
   id: string;
   className?: string;
@@ -37,24 +41,47 @@ export const ModelCard_statusDefault: FC<Props> = memo(function ModelCard_status
     imageSrc = image_d;
   } 
 
-
+function handleClick(){
+  console.log('Clicked delete button with id:', id);
+  onDelete(id, 'delete');
+}
   return (
+    <div>
+
+{/* <button onClick={handleClick}>Delete</button> */}
+
 
     <div className={`${resets.clapyResets} ${classes.root}`}>
+     
       <div className={classes.rectangle1}></div>
       <div className={classes.gPT3IsTheLanguageModelIMCurren}>
         {description}
       </div>
       <div className={classes.frame5}>
         <div className={classes.frame}>
-          <FrameIcon className={classes.icon}/>
+          {/* <FrameIcon className={classes.icon}/> */}
+          <img src={editIcon} alt='edit' width='20' height='20' style={{marginLeft:'20px',marginRight: '10px'}}  / >
+       
+       {/* add some space between two images */}
+
+
+        <div onClick={handleClick}>
+        <img src={deleteIcon} alt='delete' width='20' height='20'  / >
+        </div>
+       
+
+
     
+
         </div>
         <div className={classes.frame4}>
           <div className={classes.frame2}>
-            <FrameIcon2 className={classes.icon2} />
+
+            {/* <FrameIcon2 className={classes.icon2} /> */}
+
           </div>
-          <div className={classes.run}>Run</div>
+          {/* <div className={classes.run}>Run</div> */}
+          <img src={mintIcon} alt='edit' width='80' height='30'  / >
         </div>
       </div>
       <div className={classes.modelNameGPT3}>{title}</div>
@@ -67,15 +94,16 @@ export const ModelCard_statusDefault: FC<Props> = memo(function ModelCard_status
       {/* <button onClick={handleClick}>Send Data to Parent</button> */}
 
 
-      {imageSrc==image_a && <img src={imageSrc} alt='model' width='60' height='40'  / >}
-      {imageSrc==image_b && <img src={imageSrc} alt='model' width='100' height='40'  / >}
-      {imageSrc==image_c && <img src={imageSrc} alt='model' width='70' height='40'  / >}
-      {imageSrc==image_d && <img src={imageSrc} alt='model' width='90' height='40'  / >}
+      {imageSrc==image_a && <img src={imageSrc} alt='model' width='60' height='60' style={{marginRight: '10px'}} / >}
+      {imageSrc==image_b && <img src={imageSrc} alt='model' width='100' height='60'  style={{marginRight: '10px'}}/ >}
+      {imageSrc==image_c && <img src={imageSrc} alt='model' width='70' height='60' style={{marginRight: '10px'}} / >}
+      {imageSrc==image_d && <img src={imageSrc} alt='model' width='90' height='60' style={{marginRight: '10px'}} / >}
       </div>
 
     
 
       {/* <ModelNameLogo_modelVariant2 className={classes.modelNameLogo} /> */}
+    </div>
     </div>
   );
 });

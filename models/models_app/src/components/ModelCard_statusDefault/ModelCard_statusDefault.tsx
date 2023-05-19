@@ -81,7 +81,7 @@ function handleClick(){
 
           </div>
           {/* <div className={classes.run}>Run</div> */}
-          <img src={mintIcon} alt='edit' width='80' height='30'  / >
+          <img src={mintIcon} alt='edit' width='80' height='30' style={{marginRight:'10px'}} / >
         </div>
       </div>
       <div className={classes.modelNameGPT3}>{title}</div>

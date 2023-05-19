@@ -36,13 +36,6 @@ function Grid({onNewModel}) {
     };
 
     // pass  back without actualling calling it
-
-
-
-
-
-
-  
   
     const deleteGridItem = (id) => {
       setData(data.filter(item => item.id !== id));
@@ -70,19 +63,10 @@ function Grid({onNewModel}) {
         <ModelCard_statusDefault id={item.id} title={item.title} description={item.description} modelImage={item.modelImage} onDelete={handleDelete}/>
         
       </div>  
-{/* 
-          <div className="grid-item" key={item.id}>
-            <button className="delete-button" onClick={() => deleteGridItem(item.id)}>X</button>
-            <h2>{item.title}</h2>
-            <p>{item.description}</p>
-          </div> */}
 
           </div>
         ))}
-        {/* <div className="grid-item add-new" onClick={addNewGridItem}>
-          <h2><GrAdd></GrAdd></h2>
-          <p>Click here to train a new fine-tune model</p>
-        </div> */}
+    
 
           
   

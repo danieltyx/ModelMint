@@ -25,3 +25,4 @@ yarn-error.log*
 #keys 
 firebaseConfig.js
 .DS_Store
+.vercel

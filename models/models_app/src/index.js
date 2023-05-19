@@ -27,14 +27,12 @@ import ModelMainPage from './ModelMainPage.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  
- 
 <div>
 <BrowserRouter> 
      <Navbar/>
-     <Switch> {/* Use the Switch component to render the correct page based on the URL */}
-        <Route exact path="/" component={ModelMainPage} /> {/* Set up a route for the Grid component */}
-        <Route path="/marketplace" component={NewPage}/> {/* Set up a route for the NewPage component */}
+     <Switch> 
+        <Route exact path="/" component={ModelMainPage} />
+        <Route path="/marketplace" component={NewPage}/> 
       </Switch>
       </BrowserRouter>
       </div>

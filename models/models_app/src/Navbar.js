@@ -5,14 +5,31 @@ import WriteToFirestore from './WriteToFirestore';
 import { ConnectButton,getDefaultWallets } from '@rainbow-me/rainbowkit';
 import MetaMaskSDK from '@metamask/sdk';
 import { Link } from 'react-router-dom'; // Import the Link component
-
+import ReadFromFirestore from './ReadFromFirestore';
+import {setCurrentUserWalletAddress, getCurrentUserWalletAddress}from './globalVariable';
 // const [modalIsOpen, setIsOpen] = useState(false);
 
-const Navbar = () => {
+import firebase from "./firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
+import 'firebase/firestore';
+import ReadFromFirestoreAll from './ReadFromFirestoreAll';
+const db = firebase.firestore();
+function Navbar() {
   const [walletAddress,setWalletAddress] = useState('null');
   const MMSDK = new MetaMaskSDK();
   const ethereum = MMSDK.getProvider(); // You can also access via window.ethereum
+  const [data, setData] = useState();
 
+  function handletest()
+  {
+    // const data = useReadFromFirestore('Users', '0x22815bb7b2ea2d6b3c23d8e80f3894d31a841f75');
+    // ReadFromFirestore('Users', '0x22815bb7b2ea2d6b3c23d8e80f3894d31a841f75').then((data) => {
+      // console.log(data);
+    // });
+    // ReadFromFirestoreAll('models').then((data) => {
+    //   console.log(data);
+    // });
+  }
     function handleConnect()
     {
       window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] })
@@ -20,10 +37,12 @@ const Navbar = () => {
         console.log('Wallet connected successfully.');
         setWalletAddress(window.ethereum.selectedAddress);
         console.log(window.ethereum.isConnected());
-        console.log(walletAddress)
-        console.log(window.ethereum.selectedAddress)
+        // console.log(walletAddress)
+        // console.log(window.ethereum.selectedAddress)
        
       }).then(() => {
+        setCurrentUserWalletAddress( window.ethereum.selectedAddress);
+        console.log(getCurrentUserWalletAddress());
         WriteToFirestore('Users',window.ethereum.selectedAddress,{'created_time':new Date().toLocaleTimeString()});
       })
       .catch((error) => {
@@ -77,6 +96,8 @@ const Navbar = () => {
       </div>
       <Link to="/marketplace">Marketplace</Link> {/* Use the Link component to navigate to the marketplace page */}
 <Link to="/">Models</Link>
+
+          <button onClick={handletest}>test</button>
 
       <div className="wallet-address-container">
       {walletAddress == 'null' ?  <button onClick={handleConnect}>Connect to MetaMask</button>:<h1>{walletAddress}</h1>}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {GrAdd} from 'react-icons/gr';
 import './App.css';
 
@@ -8,18 +8,35 @@ import { ModelCard_statusDefault } from './components/ModelCard_statusDefault/Mo
 import { stringToBytes } from 'viem';
 import ButtonDarkExample from './components/ModelCard_statusDefault/dropdownButton';
 import NewModel from './Newmodel';
+import ReadFromFirestore from './ReadFromFirestore';
+import ReadFromFirestoreAll from './ReadFromFirestoreAll';
 
 function Grid({onNewModel}) {
-    const initialData = [
+    var initialData = [
       { id: 1, title: 'GPT-3', description: 'GPT-3 is an autoregressive language model that uses deep learning to produce human-like text.' ,modelImage:'image-a'},
       { id: 2, title: 'GPT-4', description: 'GPT-4 is a larger and more advanced version of GPT-3 that can generate even more sophisticated text.',modelImage :'image-b' },
       { id: 3, title: 'ChatGPT', description: 'ChatGPT is a special version of the GPT model that is designed for generating conversational responses.' ,modelImage:'image-c'},
       { id: 4, title: 'BSGPT', description: 'BSGPT is purely BS' ,modelImage:'image-d'},
       // Add more items as needed
     ];
+
+    // ReadFromFirestoreAll('models').then((data) => {
+    //   initialData=data;
+    //   // console.log(initialData);
+    // });
+
     const [data, setData] = useState(initialData);
     const [nextId, setNextId] = useState(5);
     
+  useEffect(() => {
+    const fetchData = async () => {
+      const initialData = await ReadFromFirestoreAll("models");
+      setData(initialData);
+    };
+    fetchData();
+  }, []);
+
+
 
     function handleClick(){
             

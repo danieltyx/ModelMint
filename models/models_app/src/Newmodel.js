@@ -1,11 +1,36 @@
 import React from "react";
-
+import { getCurrentUserWalletAddress } from "./globalVariable";
 function NewModel(props)
 {
     const handleUploadClick = () => {
         console.log("upload clicked");
         props.func();
       };
+    let userWallet = getCurrentUserWalletAddress();
+    console.log(userWallet);
+
+
+     // get from backend
+    // fetch(`http://localhost:4001/user${userWallet}`)
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    // .catch(error => console.error('Error:', error));
+
+    // send post request to backend
+    // fetch(`http://localhost:4001/user${userWallet}`, {
+    //     method: 'POST', // or 'PUT'
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //         "name":"Daniel",
+    //         "age":"19",
+    //         "sdf":"sdf"
+    //       }),
+        
+    //   })
+      
+
 
     return (
         <div className="new-model-container">

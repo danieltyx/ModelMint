@@ -12,7 +12,6 @@ function ModelMainPage()
 
     return(
         <div>
-
         <NewModel func ={addFunc}/>
         <Grid onNewModel={handleDataChange}/>
         </div>

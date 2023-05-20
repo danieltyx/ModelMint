@@ -5,6 +5,8 @@ const cors = require('cors');
 const port = 4001;
 const db = require('./firebaseConfig');
 const { getFirestore, collection, doc, setDoc,getDoc,deleteDoc, addDoc } = require('firebase/firestore/lite');
+
+
 app.use(cors());
 app.use(express.json());
 

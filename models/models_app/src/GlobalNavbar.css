@@ -4,14 +4,14 @@
 
 /* Auto layout */
 
-
+padding-top: 98.72px; 
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 30px 0px 0px;
 
-position: absolute;
+position: fixed;
 width: 90%;
 height: 98.72px;
 left: 0px;

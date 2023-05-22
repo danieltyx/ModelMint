@@ -34,8 +34,8 @@ root.render(
      {/* <Navbar/> */}
      <GlobalNavbar/>
      <Switch> 
-        <Route exact path="/" component={ModelMainPage} />
-        <Route path="/marketplace" component={NewPage}/> 
+        <Route exact path="/models" component={ModelMainPage} />
+        <Route path="/m" component={NewPage}/> 
         <Route path="/create-model" component={CreateModelPage}/>
       </Switch>
       </BrowserRouter>

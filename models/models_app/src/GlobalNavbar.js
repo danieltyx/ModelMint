@@ -53,14 +53,19 @@ function GlobalNavbar() {
             <h2>Dashboard</h2>  */}
 
                 {/* when img1 onClicked link to /marketplace */}
-                <a href="/marketplace">
+                <a href="/">
                     <img className="img1" src={ModelGPTLogo} alt="Logo" />
                 </a>
                 <input type="text" placeholder="Search Models" />
        
                 {(getCurrentUserWalletAddress() != null) ? (
                     // display the first 4 and last 4 digits of the wallet address
-                    <p>{getCurrentUserWalletAddress().substring(0, 4) + "..." + getCurrentUserWalletAddress().substring(getCurrentUserWalletAddress().length - 4)}</p>
+                    <div>
+                    <a href="/models"> <h1>Creator Space</h1></a>
+
+                       
+                    {/* <p>{getCurrentUserWalletAddress().substring(0, 4) + "..." + getCurrentUserWalletAddress().substring(getCurrentUserWalletAddress().length - 4)}</p> */}
+                    </div>
                 ):(            <img className="img2" src={connectLogo} onClick={handleConnect} alt="Logo" />)}
             </div>
         </div>

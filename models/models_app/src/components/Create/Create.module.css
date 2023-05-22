@@ -220,11 +220,11 @@
   align-items: flex-start;
   border-radius: 6px;
   background-color: #171818;
-  background-image: linear-gradient(-90deg, #0000 0%, #000f 100%),
-    linear-gradient(124.9deg, #37799300 0%, #377993d9 100%), /* webpackIgnore: true */ url('assets/modelCard.jpeg');
+  background-image:   url('./modelCard2.png'); 
   background-position: center;
   background-repeat: no-repeat;
-  background-size: auto, auto, cover;
+
+  background-size: auto, auto;
   overflow: hidden;
   box-shadow: -10px -10px 200px 0px #187ea505;
   transform: translateX(-50%);

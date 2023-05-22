@@ -2,9 +2,9 @@ import { memo } from 'react';
 import type { FC, ReactNode } from 'react';
 
 import resets from '../../_resets.module.css';
-import { Emoji_flagsIcon } from './Emoji_flagsIcon.tsx';
+import { Emoji_flagsIcon } from './Emoji_flagsIcon';
 import classes from './Frame2661_statusAvailable.module.css';
-import { InfoIcon } from './InfoIcon.tsx';
+import { InfoIcon } from './InfoIcon';
 
 interface Props {
   className?: string;

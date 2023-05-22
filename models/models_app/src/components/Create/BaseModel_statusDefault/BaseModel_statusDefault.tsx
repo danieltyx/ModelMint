@@ -2,9 +2,9 @@ import { memo } from 'react';
 import type { FC, ReactNode } from 'react';
 
 import resets from '../../_resets.module.css';
-import { ColorfulModelNameLogo_modelC } from '../ColorfulModelNameLogo_modelC/ColorfulModelNameLogo_modelC.tsx';
+import { ColorfulModelNameLogo_modelC } from '../ColorfulModelNameLogo_modelC/ColorfulModelNameLogo_modelC';
 import classes from './BaseModel_statusDefault.module.css';
-import { FrameIcon } from './FrameIcon.tsx';
+import { FrameIcon } from './FrameIcon';
 
 interface Props {
   className?: string;

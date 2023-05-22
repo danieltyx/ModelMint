@@ -2,18 +2,18 @@ import { memo } from 'react';
 import type { FC } from 'react';
 
 import resets from '../_resets.module.css';
-import { BaseModel_statusDefault } from './BaseModel_statusDefault/BaseModel_statusDefault.tsx';
-import { ColorfulModelNameLogo_modelA } from './ColorfulModelNameLogo_modelA/ColorfulModelNameLogo_modelA.tsx';
-import { ColorfulModelNameLogo_modelB } from './ColorfulModelNameLogo_modelB/ColorfulModelNameLogo_modelB.tsx';
-import { ColorfulModelNameLogo_modelD } from './ColorfulModelNameLogo_modelD/ColorfulModelNameLogo_modelD.tsx';
+import { BaseModel_statusDefault } from './BaseModel_statusDefault/BaseModel_statusDefault';
+import { ColorfulModelNameLogo_modelA } from './ColorfulModelNameLogo_modelA/ColorfulModelNameLogo_modelA';
+import { ColorfulModelNameLogo_modelB } from './ColorfulModelNameLogo_modelB/ColorfulModelNameLogo_modelB';
+import { ColorfulModelNameLogo_modelD } from './ColorfulModelNameLogo_modelD/ColorfulModelNameLogo_modelD';
 import classes from './Create.module.css';
-import { Emoji_flagsIcon } from './Emoji_flagsIcon.tsx';
-import { Frame11Icon } from './Frame11Icon.tsx';
-import { Frame2661_statusAvailable } from './Frame2661_statusAvailable/Frame2661_statusAvailable.tsx';
-import { InfoIcon } from './InfoIcon.tsx';
-import { SelectACSVFile_statusDefault } from './SelectACSVFile_statusDefault/SelectACSVFile_statusDefault.tsx';
-import { TextField_statusDefault } from './TextField_statusDefault/TextField_statusDefault.tsx';
-import { Upload_fileIcon } from './Upload_fileIcon.tsx';
+import { Emoji_flagsIcon } from './Emoji_flagsIcon';
+import { Frame11Icon } from './Frame11Icon';
+import { Frame2661_statusAvailable } from './Frame2661_statusAvailable/Frame2661_statusAvailable';
+import { InfoIcon } from './InfoIcon';
+import { SelectACSVFile_statusDefault } from './SelectACSVFile_statusDefault/SelectACSVFile_statusDefault';
+import { TextField_statusDefault } from './TextField_statusDefault/TextField_statusDefault';
+import { Upload_fileIcon } from './Upload_fileIcon';
 
 interface Props {
   className?: string;

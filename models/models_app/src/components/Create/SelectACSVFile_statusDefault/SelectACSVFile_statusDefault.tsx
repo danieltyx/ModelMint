@@ -3,7 +3,7 @@ import type { FC, ReactNode } from 'react';
 
 import resets from '../../_resets.module.css';
 import classes from './SelectACSVFile_statusDefault.module.css';
-import { Upload_fileIcon } from './Upload_fileIcon.tsx';
+import { Upload_fileIcon } from './Upload_fileIcon';
 
 interface Props {
   className?: string;

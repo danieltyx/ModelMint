@@ -3,7 +3,7 @@ import type { FC } from 'react';
 
 import resets from '../../_resets.module.css';
 import classes from './ColorfulModelNameLogo_modelB.module.css';
-import { Frame12Icon } from './Frame12Icon.tsx';
+import { Frame12Icon } from './Frame12Icon';
 
 interface Props {
   className?: string;

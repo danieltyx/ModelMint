@@ -2,7 +2,7 @@ import { memo } from 'react';
 import type { FC, ReactNode } from 'react';
 
 import resets from '../../_resets.module.css';
-import { SearchIcon } from './SearchIcon.tsx';
+import { SearchIcon } from './SearchIcon';
 import classes from './TextField_statusDefault.module.css';
 
 interface Props {

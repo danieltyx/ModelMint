@@ -88,8 +88,13 @@ function Grid({onNewModel}) {
           
   
       </div>
+
+
       <div className='new-model-container-2'>
-      <button  onClick={handleClick}>Create My Model</button>
+{/* add a plus icon */}
+      <GrAdd className='plus-icon' />
+
+      <button  onClick={handleClick}>Create A Model</button>
       </div>
 </div>
       

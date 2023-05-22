@@ -23,13 +23,14 @@ import NewPage from './marketplace/Newpage.js'; // Import the NewPage component
 import NewModel from './Newmodel.js';
 import "@fontsource/red-rose"
 import ModelMainPage from './ModelMainPage.js';
-
+import GlobalNavbar from './GlobalNavbar.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
 <div>
 <BrowserRouter> 
-     <Navbar/>
+     {/* <Navbar/> */}
+     <GlobalNavbar/>
      <Switch> 
         <Route exact path="/" component={ModelMainPage} />
         <Route path="/marketplace" component={NewPage}/> 

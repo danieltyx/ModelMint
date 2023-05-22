@@ -6,12 +6,12 @@ body {
     align-items: center;
     min-height: 100vh;
     background: #0D0E0F;
-    font-family: 'Arial', sans-serif;
+    font-family: 'SF Pro', sans-serif;
   }
   
   .grid-container {
     position: absolute;
-    left: 12%;
+    left: 475px;
     top: 35%;
 
 
@@ -225,21 +225,15 @@ body {
     font-family: monospace;
   }
 
-  .div{
-  /* make it no spacing  */
-  margin: 0;
-  padding: 0;
-
-  }
 
   .new-model-container{
     /* model card */
       position: absolute;
       width: 980px;
       height: 158px;
-      left: 230px;
+      left: 475px;
       top: 130px;
-
+    
 
 
       background: url('./css_images/1.jpg');
@@ -259,7 +253,7 @@ body {
       left: 32px;
       top: 41px;
 
-      font-family: 'Red Rose';
+      font-family: 'SF Pro Display';
       font-style: normal;
       font-weight: 700;
       font-size: 22px;
@@ -278,7 +272,7 @@ body {
     left: 32px;
     top: 84px;
     
-    font-family: 'Poppins';
+    font-family: 'SF Pro';
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -327,10 +321,10 @@ gap: 10px;
 position: absolute;
 width: 219px;
 height: 48px;
-left: 950px;
+left: 1150px;
 top: 160px;
 
-background: rgba(55, 122, 148, 0.3);
+background: #387B94;
 border-radius: 12px;
 }
 

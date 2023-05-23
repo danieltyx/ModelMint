@@ -1,6 +1,6 @@
-import { memo , useState} from 'react';
+import { memo, useState } from 'react';
 import type { FC } from 'react';
-
+import React from 'react';
 import resets from '../_resets.module.css';
 import { BaseModel_statusDefault } from './BaseModel_statusDefault/BaseModel_statusDefault';
 import { ColorfulModelNameLogo_modelA } from './ColorfulModelNameLogo_modelA/ColorfulModelNameLogo_modelA';
@@ -14,6 +14,7 @@ import { InfoIcon } from './InfoIcon';
 import { SelectACSVFile_statusDefault } from './SelectACSVFile_statusDefault/SelectACSVFile_statusDefault';
 import { TextField_statusDefault } from './TextField_statusDefault/TextField_statusDefault';
 import { Upload_fileIcon } from './Upload_fileIcon';
+import { TextField } from "@mui/material";
 
 interface Props {
   className?: string;
@@ -24,11 +25,43 @@ interface Props {
 }
 /* @figmaId 171:3222 */
 export const Create: FC<Props> = memo(function Create(props = {}) {
+  const [modelName, setModelName] = useState('');
+  const [basemodel, setBaseModel] = useState('A');
 
-  const [modelName, setmodelName] = useState("");
 
-  const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setmodelName(event.target.value);
+  const handleNameChange = (nameValue: string) => {
+    setModelName(nameValue);
+    if (props.onNameChange) {
+      props.onNameChange(nameValue); // Call the callback function with the nameValue state
+    }
+  };
+ 
+  const handleBaseModelChange = (nameValue: string) => {
+    setBaseModel(nameValue);
+    if (props.onModelChange) {
+      props.onModelChange(nameValue); // Call the callback function with the nameValue state
+    }
+     setBaseModel(nameValue);
+    if (props.onModelChange) {
+      props.onModelChange(nameValue); // Call the callback function with the nameValue state
+    }
+    console.log(basemodel);
+  };
+
+  
+
+  let [descValue, setdescValue] = React.useState('Describe the functions, creative ways, and ideal scenarios of using this model.');
+  const handleDescChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setdescValue(event.target.value);
+
+  };
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    setdescValue('');
+  };
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    if (descValue === '') {
+      setdescValue('Describe the functions, creative ways, and ideal scenarios of using this model.');
+    }
   };
 
 
@@ -40,10 +73,11 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
             <div className={classes.nameYourModel}>Name your model</div>
           </div>
           <TextField_statusDefault
-          
+
             hide={{
               search: true,
             }}
+            onNameChange={handleNameChange} // Pass the callback function as a prop
           />
         </div>
         <div className={classes.frame26592}>
@@ -57,9 +91,30 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
             }}
             text={{
               eGNameGPT: (
+
+
                 <div className={classes.eGNameGPT}>
                   <div className={classes.textBlock}>
-                    Describe the functions, creative ways, and ideal scenarios of using this model.
+
+                    <TextField value={descValue}
+
+                      onFocus={handleFocus}
+                      onBlur={handleBlur}
+                      onChange={handleDescChange}
+
+                      multiline
+                      maxRows={4}
+
+                      InputProps={{ // Add the InputProps prop
+                        style: {
+                          color: "white",
+                          backgroundColor: "transparent",
+                        }
+                      }}
+                      style={{ width: "100%" }}
+                      id="fullWidth" />
+
+
                   </div>
                   <div className={classes.textBlock2}>
                     <p></p>
@@ -87,6 +142,7 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
                     </div>
                   ),
                 }}
+                onNameChange={handleBaseModelChange}
               />
               <BaseModel_statusDefault
                 swap={{
@@ -99,10 +155,14 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
                     </div>
                   ),
                 }}
+                onNameChange={handleBaseModelChange}
+
               />
             </div>
             <div className={classes.frame26572}>
-              <BaseModel_statusDefault />
+              <BaseModel_statusDefault 
+               onNameChange={handleBaseModelChange}
+               />
               <BaseModel_statusDefault
                 swap={{
                   colorfulModelNameLogo: (
@@ -120,6 +180,7 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
                     </div>
                   ),
                 }}
+                onNameChange={handleBaseModelChange}
               />
             </div>
           </div>

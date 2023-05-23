@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo , useState} from 'react';
 import type { FC } from 'react';
 
 import resets from '../_resets.module.css';
@@ -24,6 +24,14 @@ interface Props {
 }
 /* @figmaId 171:3222 */
 export const Create: FC<Props> = memo(function Create(props = {}) {
+
+  const [modelName, setmodelName] = useState("");
+
+  const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setmodelName(event.target.value);
+  };
+
+
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
       <div className={classes.frame2659}>
@@ -32,6 +40,7 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
             <div className={classes.nameYourModel}>Name your model</div>
           </div>
           <TextField_statusDefault
+          
             hide={{
               search: true,
             }}

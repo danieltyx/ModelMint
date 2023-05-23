@@ -4,6 +4,8 @@ import type { FC, ReactNode } from 'react';
 import resets from '../../_resets.module.css';
 import { SearchIcon } from './SearchIcon';
 import classes from './TextField_statusDefault.module.css';
+import {TextField} from '@adobe/react-spectrum'
+
 
 interface Props {
   className?: string;
@@ -26,7 +28,10 @@ export const TextField_statusDefault: FC<Props> = memo(function TextField_status
           <SearchIcon className={classes.icon} />
         </div>
       )}
-      {props.text?.eGNameGPT != null ? props.text?.eGNameGPT : <div className={classes.eGNameGPT}>e.g. nameGPT</div>}
+      {props.text?.eGNameGPT != null ? props.text?.eGNameGPT : <div className={classes.eGNameGPT}>
+               "e.g. nameGPT"
+        <TextField label=""   defaultValue=""/>      
+        </div>}
     </div>
   );
 });

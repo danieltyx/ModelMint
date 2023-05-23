@@ -17,6 +17,9 @@
   height: 100%;
 }
 .eGNameGPT {
+  width: 100%;
+  /* width: auto; */
+  height: 100%;
   opacity: 0.2;
   color: #fff;
   font-size: 16px;

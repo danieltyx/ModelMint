@@ -15,6 +15,35 @@ import { SelectACSVFile_statusDefault } from './SelectACSVFile_statusDefault/Sel
 import { TextField_statusDefault } from './TextField_statusDefault/TextField_statusDefault';
 import { Upload_fileIcon } from './Upload_fileIcon';
 import { TextField } from "@mui/material";
+import { FilePond, File, registerPlugin } from "react-filepond";
+// Import FilePond styles
+import "filepond/dist/filepond.min.css";
+
+// Import the Image EXIF Orientation and Image Preview plugins
+// Note: These need to be installed separately
+// `npm i filepond-plugin-image-preview filepond-plugin-image-exif-orientation --save`
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import FilePondPluginFileEncode from "filepond-plugin-file-encode";
+import FilePondPluginImageTransform from "filepond-plugin-image-transform";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+import FilePondPluginImageResize from "filepond-plugin-image-resize";
+import FilePondPluginImageCrop from "filepond-plugin-image-crop";
+
+
+registerPlugin(
+  FilePondPluginImageExifOrientation,
+  FilePondPluginImagePreview,
+  FilePondPluginFileEncode,
+  FilePondPluginFileValidateSize,
+  FilePondPluginFileValidateType,
+  FilePondPluginImageResize,
+  FilePondPluginImageCrop,
+  FilePondPluginImageTransform
+);
+
 
 interface Props {
   className?: string;
@@ -27,6 +56,10 @@ interface Props {
 export const Create: FC<Props> = memo(function Create(props = {}) {
   const [modelName, setModelName] = useState('');
   const [basemodel, setBaseModel] = useState('A');
+  const [trainFile, settrainFile] = useState([])
+  const [modelid, setmodelid] = useState('Have not created yet');
+  const [currentstatus, setCurrentStatus] = useState("available");
+
 
 
   const handleNameChange = (nameValue: string) => {
@@ -35,20 +68,20 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
       props.onNameChange(nameValue); // Call the callback function with the nameValue state
     }
   };
- 
+
   const handleBaseModelChange = (nameValue: string) => {
     setBaseModel(nameValue);
     if (props.onModelChange) {
       props.onModelChange(nameValue); // Call the callback function with the nameValue state
     }
-     setBaseModel(nameValue);
+    setBaseModel(nameValue);
     if (props.onModelChange) {
       props.onModelChange(nameValue); // Call the callback function with the nameValue state
     }
     console.log(basemodel);
   };
 
-  
+
 
   let [descValue, setdescValue] = React.useState('Describe the functions, creative ways, and ideal scenarios of using this model.');
   const handleDescChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -160,9 +193,9 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
               />
             </div>
             <div className={classes.frame26572}>
-              <BaseModel_statusDefault 
-               onNameChange={handleBaseModelChange}
-               />
+              <BaseModel_statusDefault
+                onNameChange={handleBaseModelChange}
+              />
               <BaseModel_statusDefault
                 swap={{
                   colorfulModelNameLogo: (
@@ -187,14 +220,44 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
         </div>
         <div className={classes.frame2649}>
           <div className={classes.uploadYourCSVFile}>Upload your CSV file</div>
-          <SelectACSVFile_statusDefault
+          
+          {/* <SelectACSVFile_statusDefault
             swap={{
               upload_file: <Upload_fileIcon className={classes.icon2} />,
             }}
             text={{
               selectFileCSV: <div className={classes.selectFileCSV}>Select file (.csv)</div>,
             }}
-          />
+          /> */}
+
+           <div style={{ display: "flex", justifyContent: "flex-end", marginLeft: "70%" }}> {/* Set the marginLeft to 50% */}
+           <div style={{ backgroundColor: "white" }}> {/* Set the background color to white */}
+     
+
+      <FilePond
+        files={trainFile}
+        onupdatefiles={settrainFile}
+        instantUpload={false}
+        allowMultiple={false}
+        server="http://localhost:4003/upload"
+        name="file"
+        labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+        onprocessfile={(error, file) => {
+          if (!error) {
+            const response = JSON.parse(file.serverId);
+            console.log(response);
+            if(response.message = "File uploaded successfully!"){
+              setmodelid(response.model_id);
+            }
+          } else {
+            
+            console.log(error);
+          }
+        }}
+       />
+   
+          </div>
+          </div>
         </div>
       </div>
       <Frame2661_statusAvailable
@@ -203,11 +266,13 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
           emoji_flags: <Emoji_flagsIcon className={classes.icon3} />,
           info: <InfoIcon className={classes.icon4} />,
         }}
+        currentstatus={currentstatus}
       />
       <div className={classes.modelCard}>
         <div className={classes.createATextBasedModel}>Create a text-based model </div>
         <div className={classes.trainingCanOnlyStartOnceAllThe}>
           Training can only start once all the following blanks are filled.{' '}
+   
         </div>
       </div>
     </div>

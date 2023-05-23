@@ -1,14 +1,42 @@
 const express = require('express');
+const multer = require('multer');
 const app = express();
+const upload = multer({ dest: 'uploads/' });
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const port = 4001;
+const port = 4003;
+const { trainModel } = require('./train_model');
 const db = require('./firebaseConfig');
 const { getFirestore, collection, doc, setDoc,getDoc,deleteDoc, addDoc } = require('firebase/firestore/lite');
-
-
+const fs = require('fs');
+var csvFilePath = "test.csv";
 app.use(cors());
 app.use(express.json());
+
+app.post('/upload', upload.single("file"), (req, res) => {
+    const file = req.file;
+    if (!file) {
+        res.status(400).send({ message: 'No file uploaded' });
+        return;
+      }
+    console.log(file);
+        const newPath = `${__dirname}/uploads/testtest2.csv`;
+        csvFilePath = newPath;
+        fs.rename( file.path, newPath, (err) => {
+            if (err) {
+            console.error(err);
+            res.status(500).send({ message: 'Error saving file' });
+            } else {
+            console.log("csvFilePath: ", csvFilePath);
+            trainModel(csvFilePath).then((model_id) => {
+                console.log("model_id: ", model_id);
+                res.send({ message: 'File uploaded successfully!', model_id: model_id });
+            });
+            }
+        });
+
+  });
+  
 
 app.route('/user:userId')
     .get(async (req, res) => {
@@ -53,5 +81,6 @@ app.route('/user:userId')
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
+ 
   }
 )

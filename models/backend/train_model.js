@@ -63,10 +63,10 @@ async function trainModel(csvFilePath) {
             console.log(response.data);
               console.log(response.data.id);
               return response.data.id; 
-
       } catch (error) {
           console.log(error);
-          }}
+          }
+        }
 
   async function createFineTune(file_name) {
 
@@ -94,7 +94,6 @@ async function trainModel(csvFilePath) {
       );
   }
 
-
       createOutputName();
       await csvToJsonl();
       const file_name = await uploadFile();
@@ -105,7 +104,6 @@ async function trainModel(csvFilePath) {
       console.log("model_id: ",model_id);
       return model_id;
   
-
   }
 
 module.exports = { trainModel };

@@ -31,7 +31,10 @@ import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginImageResize from "filepond-plugin-image-resize";
 import FilePondPluginImageCrop from "filepond-plugin-image-crop";
-
+import LinearProgress from '@mui/material/LinearProgress';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import { useHistory } from 'react-router-dom';
 
 registerPlugin(
   FilePondPluginImageExifOrientation,
@@ -54,11 +57,13 @@ interface Props {
 }
 /* @figmaId 171:3222 */
 export const Create: FC<Props> = memo(function Create(props = {}) {
+  const history = useHistory();
   const [modelName, setModelName] = useState('');
   const [basemodel, setBaseModel] = useState('A');
   const [trainFile, settrainFile] = useState([])
   const [modelid, setmodelid] = useState('Have not created yet');
   const [currentstatus, setCurrentStatus] = useState("available");
+  // available, training, finished
 
 
 
@@ -97,6 +102,16 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
     }
   };
 
+   function handleClick() {
+    if (currentstatus === 'available') {
+      setCurrentStatus('training');
+    } else if (currentstatus === 'training') {
+      setCurrentStatus('finished');
+    } else if (currentstatus === 'finished') {
+      //go to the model page
+      history.push('/models'); 
+    }
+  }
 
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
@@ -104,6 +119,7 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
         <div className={classes.frame2650}>
           <div className={classes.frame2654}>
             <div className={classes.nameYourModel}>Name your model</div>
+            
           </div>
           <TextField_statusDefault
 
@@ -248,9 +264,9 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
             console.log(response);
             if(response.message = "File uploaded successfully!"){
               setmodelid(response.model_id);
+              
             }
           } else {
-            
             console.log(error);
           }
         }}
@@ -267,12 +283,12 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
           info: <InfoIcon className={classes.icon4} />,
         }}
         currentstatus={currentstatus}
+        onClick={handleClick}
       />
       <div className={classes.modelCard}>
         <div className={classes.createATextBasedModel}>Create a text-based model </div>
         <div className={classes.trainingCanOnlyStartOnceAllThe}>
           Training can only start once all the following blanks are filled.{' '}
-   
         </div>
       </div>
     </div>

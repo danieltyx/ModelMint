@@ -41,9 +41,11 @@ export const Frame2661_statusAvailable: FC<Props> = memo(function Frame2661_stat
             {/* <div className={classes.emoji_flags}> */}
               {/* {props.swap?.emoji_flags || <Emoji_flagsIcon className={classes.icon} />} */}
             {/* </div> */}
+
             {props.currentstatus === "available" &&   <div className={classes.train}>Train</div>}
             {props.currentstatus === "training" &&   <div className={classes.train}>Training</div>}
             {props.currentstatus === "finished" &&   <div className={classes.train}>Done</div>}  
+            
           </div>
         </div>
         <div className={classes.frame2677}>

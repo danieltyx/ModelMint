@@ -35,7 +35,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { useHistory } from 'react-router-dom';
-
+import WriteToFirestore_UID from '../../WriteToFirestore_UID.js';
+import {getCurrentUserWalletAddress} from '../../globalVariable.js';
 registerPlugin(
   FilePondPluginImageExifOrientation,
   FilePondPluginImagePreview,
@@ -104,12 +105,22 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
 
    function handleClick() {
     if (currentstatus === 'available') {
+
       setCurrentStatus('training');
+
     } else if (currentstatus === 'training') {
+
       setCurrentStatus('finished');
+
     } else if (currentstatus === 'finished') {
-      //go to the model page
-      history.push('/models'); 
+      WriteToFirestore_UID("models",{ 
+        'created_time': new Date().toLocaleTimeString(),
+        'description': descValue,
+        'title': modelName,
+        'model_id': modelid,
+        'creator':getCurrentUserWalletAddress(),
+      });
+      history.push('/models');
     }
   }
 

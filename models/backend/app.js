@@ -9,9 +9,17 @@ const { trainModel } = require('./train_model');
 const db = require('./firebaseConfig');
 const { getFirestore, collection, doc, setDoc,getDoc,deleteDoc, addDoc } = require('firebase/firestore/lite');
 const fs = require('fs');
+const { lookupStatus } = require('./lookupStatus');
 var csvFilePath = "test.csv";
 app.use(cors());
 app.use(express.json());
+
+app.post('/lookup:modelid', async (req, res) => {
+    const model_id = req.params.modelid;
+    lookupStatus(model_id).then((response) => {
+        res.send(response);
+    });
+});
 
 app.post('/upload', upload.single("file"), (req, res) => {
     const file = req.file;

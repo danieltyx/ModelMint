@@ -1,7 +1,8 @@
 const fs = require("fs");
 const csv = require("csv-parser");
 const { Configuration, OpenAIApi } = require("openai");
-const {openai_key} = require('./openaiConfig.js');
+const { openai_key } = require("./openaiConfig.js");
+
 const { json } = require("body-parser");
 
 // const csvFilePath = "test.csv";
@@ -16,6 +17,9 @@ var json_file_name = "";
 var model_id = "ft-OMPfGWlC6nlhqLtybBEsRNRf";
 
 async function trainModel(csvFilePath) {
+  
+  
+  console.log("openai_key: ", openai_key);
 
   function createOutputName() {
       var d = new Date();

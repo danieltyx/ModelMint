@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {setCurrentUserWalletAddress, getCurrentUserWalletAddress} from './globalVariable';
 import './GlobalNavbar.css';
 import { TextField, Input } from '@mui/material';
@@ -43,7 +43,12 @@ function GlobalNavbar() {
                 console.error('Failed to connect wallet:', error);
             });
     }
-
+    useEffect(() => {
+        const storedWalletAddress = localStorage.getItem('walletAddress');
+        if (storedWalletAddress) {
+            setCurrentUserWalletAddress(storedWalletAddress);
+        }
+    }, []);
 
     return (
         <div className="global-navbar-container">

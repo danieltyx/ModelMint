@@ -2,17 +2,17 @@ import React, { useState,useEffect } from "react";
 import {setCurrentUserWalletAddress, getCurrentUserWalletAddress} from './globalVariable';
 import './GlobalNavbar.css';
 import { TextField, Input } from '@mui/material';
-import WriteToFirestore from './WriteToFirestore';
+import WriteToFirestore from './firebaseFunctions/WriteToFirestore';
 
 import ModelGPTLogo from './images/ModelGPTLogo.png';
 import connectLogo from './images/connect.png';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
-import firebase from "./firebaseConfig";
+import firebase from "./firebaseFunctions/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import 'firebase/firestore';
-import ReadFromFirestoreAll from './ReadFromFirestoreAll';
+import ReadFromFirestoreAll from './firebaseFunctions/ReadFromFirestoreAll';
 import MetaMaskSDK from '@metamask/sdk';
 
 const db = firebase.firestore();

@@ -35,7 +35,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { useHistory } from 'react-router-dom';
-import WriteToFirestore_UID from '../../WriteToFirestore_UID.js';
+import WriteToFirestore_UID from '../../firebaseFunctions/WriteToFirestore_UID.js';
 import {getCurrentUserWalletAddress} from '../../globalVariable.js';
 registerPlugin(
   FilePondPluginImageExifOrientation,

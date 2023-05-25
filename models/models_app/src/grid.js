@@ -8,10 +8,10 @@ import { ModelCard_statusDefault } from './components/ModelCard_statusDefault/Mo
 import { stringToBytes } from 'viem';
 import ButtonDarkExample from './components/ModelCard_statusDefault/dropdownButton';
 import NewModel from './Newmodel';
-import ReadFromFirestore from './ReadFromFirestore';
-import ReadFromFirestoreAll from './ReadFromFirestoreAll';
+import ReadFromFirestore from './firebaseFunctions/ReadFromFirestore';
+import ReadFromFirestoreAll from './firebaseFunctions/ReadFromFirestoreAll';
 import { useHistory } from 'react-router-dom';
-import DeletefromFirestore from './Deletefromfirestore';
+import DeletefromFirestore from './firebaseFunctions/Deletefromfirestore';
 
 function Grid({ onNewModel }) {
   const history = useHistory();

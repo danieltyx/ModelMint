@@ -42,6 +42,7 @@ function Grid({ onNewModel }) {
 
 
   function handleClick() {
+    
     history.push('/create-model');
 
     // onNewModel(addNewGridItem);
@@ -70,7 +71,7 @@ function Grid({ onNewModel }) {
 
   function handleRun(id) {
     console.log(id)
-    history.push('/try-model');
+    history.push(`/try-model?id=${id}`);
   }
   return (
     <div>

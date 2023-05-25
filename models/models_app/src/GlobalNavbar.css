@@ -1,7 +1,7 @@
 .global-navbar-container{
     /* creator space - model card */
 
-
+    z-index: 9999;
 /* Auto layout */
 
 padding-top: 98.72px; 

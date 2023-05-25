@@ -13,6 +13,10 @@ import { UnionIcon } from './UnionIcon';
 
 interface Props {
   className?: string;
+  modelName?: string;
+  modelDescription?: string;
+  modelId?: string;
+  modelcreatedtime?: string;
 }
 /* @figmaId 487:5630 */
 export const RunningModel: FC<Props> = memo(function RunningModel(props = {}) {
@@ -55,20 +59,19 @@ export const RunningModel: FC<Props> = memo(function RunningModel(props = {}) {
       />
       <div className={classes.testRun}>Test run</div>
       <div className={classes.frame2811}>
-        <div className={classes.voxellaAI}>Voxella AI</div>
+        <div className={classes.voxellaAI}>{props.modelName}</div>
         <div className={classes.writerAICapableOfAnyTopicGenre}>
-          Writer AI capable of any topic / genre. An advanced AI language model designed to revolutionize the way you
-          communicate and...
+          {props.modelDescription}
         </div>
       </div>
       <div className={classes.frame2817}>
         <div className={classes.frame2815}>
           <div className={classes.modelId}>Model id</div>
-          <div className={classes.ftAsdhfhsduifhuasdhfodhfiodsjf}>ft-asdhfhsduifhuasdhfodhfiodsjfiahfiodsa</div>
+          <div className={classes.ftAsdhfhsduifhuasdhfodhfiodsjf}>{props.modelId}</div>
         </div>
         <div className={classes.frame2816}>
           <div className={classes.createdTime}>Created time</div>
-          <div className={classes._202325233545}>2023-2-5 23:35:45</div>
+          <div className={classes._202325233545}>{props.modelcreatedtime}</div>
         </div>
       </div>
       <div className={classes.rectangle345}></div>

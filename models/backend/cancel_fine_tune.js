@@ -17,5 +17,5 @@ async function cancelFineTune(modelId) {
   }
 }
 
-const modelId = "ft-ELEP9pQe25zzqBt4diCgcBng";
+const modelId = "ft-ab1HC3aGzdK1EeTphhoMU51o";
 cancelFineTune(modelId);

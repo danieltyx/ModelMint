@@ -65,6 +65,8 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
   const [modelid, setmodelid] = useState('Have not created yet');
   const [currentstatus, setCurrentStatus] = useState("available");
   // available, training, finished
+  const [modelStatus, setModelStatus] = useState(null);
+
 
 
 
@@ -103,14 +105,16 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
     }
   };
 
-   function handleClick() {
+   async function handleClick() {
     if (currentstatus === 'available') {
 
       setCurrentStatus('training');
+      await handleLookup();
+      
 
     } else if (currentstatus === 'training') {
+      // setCurrentStatus('finished');
 
-      setCurrentStatus('finished');
 
     } else if (currentstatus === 'finished') {
       WriteToFirestore_UID("models",{ 
@@ -124,6 +128,32 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
     }
   }
 
+  async function handleLookup() {
+    try {//${modelid}
+      //http://localhost:4003/lookupft-TxtaCcHdFwlN51KAZFkdkBAf have id
+      //http://localhost:4003/lookupft-0PyMlnD3Yq7Gnj2xLLpOl7KG  no id
+      console.log('modelid', modelid);
+      // var data;
+      const response = await fetch(`http://localhost:4003/lookupft-TxtaCcHdFwlN51KAZFkdkBAf`,{
+        method: 'POST'
+      });
+      const data = await response.json();
+      // console.log('data***', data);
+      await setTimeout(() => {
+        console.log(data.response);
+        if (data.response === "pending") {
+          setTimeout(handleLookup, 1000);
+          console.log('modelstatus', modelStatus);
+        } else {
+          console.log('modelstatus-finish', modelStatus);
+          setCurrentStatus('finished');
+        }
+      }, 5000);
+   
+    } catch (error) {
+      console.error("Error looking up model status:", error);
+    }
+  }
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
       <div className={classes.frame2659}>

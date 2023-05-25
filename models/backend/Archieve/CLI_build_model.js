@@ -1,5 +1,5 @@
 const { exec } = require('child_process');
-const { openai_key } = require('./openaiConfig');
+const { openai_key } = require('../openaiConfig');
 
 // Replace <LOCAL_FILE> with your actual file path
 // let command1 = '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"';

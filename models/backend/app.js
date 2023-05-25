@@ -5,14 +5,27 @@ const upload = multer({ dest: 'uploads/' });
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const port = 4003;
-const { trainModel } = require('./train_model');
+const { trainModel } = require('./Functions/train_model');
 const db = require('./firebaseConfig');
 const { getFirestore, collection, doc, setDoc,getDoc,deleteDoc, addDoc } = require('firebase/firestore/lite');
 const fs = require('fs');
-const { lookupStatus } = require('./lookupStatus');
+const { lookupStatus } = require('./Functions/lookupStatus');
+const {use_model } = require('./Functions/use_model');
 var csvFilePath = "test.csv";
 app.use(cors());
 app.use(express.json());
+
+app.post('/trymodel', async (req, res) => {
+    const { prompt, model_id  } = req.body;
+    console.log("model_id: ", model_id);
+    console.log("prompt: ", prompt);
+    use_model(prompt,model_id).then((response) => {
+        console.log("response: ", response);
+        res.send({
+            response: response
+        });
+    });
+});
 
 app.post('/lookup:modelid', async (req, res) => {
     const model_id = req.params.modelid;

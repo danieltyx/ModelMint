@@ -1,7 +1,7 @@
 // create a nodejs to call OPEN AI to cancel fine tune
 //
 const { Configuration, OpenAIApi } = require("openai");
-const { openai_key } = require("./openaiConfig.js");
+const { openai_key } = require("../openaiConfig.js");
 
 const configuration = new Configuration({
   apiKey: openai_key,

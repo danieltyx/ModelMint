@@ -59,7 +59,7 @@ function GlobalNavbar() {
 
                 {/* when img1 onClicked link to /marketplace */}
                 <a href="/marketplace">
-                    <img className="img1" src={ModelGPTLogo} alt="Logo" />
+                    <img className="img1" src={ModelGPTLogo} alt="Logo"  style={{ display: 'inline-block', padding: '0', marginLeft:'300px', lineHeight: '0' }}/>
                 </a>
                 <input type="text" placeholder="Search Models" />
        

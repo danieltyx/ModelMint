@@ -21,7 +21,7 @@
   place-content: space-between;
   align-items: flex-start;
   border-radius: 8px;
-  background-color: #ffffff0d, #0003;
+  background-color: rgb(26,27,28);
   backdrop-filter: blur(8px);
 }
 .frame2810 {

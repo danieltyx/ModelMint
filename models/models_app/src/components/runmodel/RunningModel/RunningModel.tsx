@@ -20,11 +20,14 @@ interface Props {
 }
 /* @figmaId 487:5630 */
 export const RunningModel: FC<Props> = memo(function RunningModel(props = {}) {
+  function handleBack(){
+    window.history.back();
+  }
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
       <div className={classes.nikuowwi_large_dark_chamber_wi}></div>
       <div className={classes.nikuowwi_website_UI_background}></div>
-      <div className={classes.frame431}>
+      <div onClick={handleBack} className={classes.frame431}>
         <Frame431Icon className={classes.icon2} />
       </div>
       <div className={classes.rectangle338}></div>

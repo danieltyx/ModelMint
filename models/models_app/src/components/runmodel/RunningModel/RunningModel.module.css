@@ -71,11 +71,12 @@
   height: 100%;
 }
 .rectangle338 {
+  opacity: 0.2;
   position: absolute;
   left: 231px;
   top: 210px;
   width: 568px;
-  height: 109px;
+  height: 120px;
   border-radius: 8px;
   background-color: #ffffff05;
   background-image: linear-gradient(-80.6deg, #4d879e00 0%, #4d879eff 100%);
@@ -119,7 +120,7 @@
   width: 627px;
   height: 463px;
   border-radius: 8px;
-  background-color: #ffffff0d, #0003;
+  background-color: rgb(26,27,28);
 }
 .anOpenCityIsACityThatHasBeenDe {
   opacity: 0.3;
@@ -288,7 +289,7 @@
   left: 250px;
   top: 210px;
   width: 19px;
-  height: 109px;
+  height: 120px;
   border-radius: 0 9px 7px 0;
   background-image: linear-gradient(180deg, #387b94ff 0%, #d9d9d930 100%);
   background-position: center;

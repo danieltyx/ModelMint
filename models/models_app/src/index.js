@@ -25,6 +25,7 @@ import "@fontsource/red-rose"
 import ModelMainPage from './ModelMainPage.js';
 import GlobalNavbar from './GlobalNavbar.js';
 import CreateModelPage from './CreateModelPage.js';
+import useModel from './useModel.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -37,6 +38,7 @@ root.render(
         <Route exact path="/models" component={ModelMainPage} />
         <Route path="/marketplace" component={NewPage}/> 
         <Route path="/create-model" component={CreateModelPage}/>
+        <Route path="/try-model" component={useModel}/>
       </Switch>
       </BrowserRouter>
       </div>

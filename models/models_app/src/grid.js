@@ -11,6 +11,7 @@ import NewModel from './Newmodel';
 import ReadFromFirestore from './ReadFromFirestore';
 import ReadFromFirestoreAll from './ReadFromFirestoreAll';
 import { useHistory } from 'react-router-dom';
+import DeletefromFirestore from './Deletefromfirestore';
 
 function Grid({ onNewModel }) {
   const history = useHistory();
@@ -28,7 +29,7 @@ function Grid({ onNewModel }) {
   // });
 
   const [data, setData] = useState(initialData);
-  const [nextId, setNextId] = useState(5);
+  const [nextId, setNextId] = useState(7);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,11 +63,15 @@ function Grid({ onNewModel }) {
 
   const handleDelete = (id, data) => {
     console.log(id)
-    console.log(data)
-    if (data) {
-      deleteGridItem(id)
-    }
+    DeletefromFirestore(id);
+    deleteGridItem(id)
+    
   };
+
+  function handleRun(id) {
+    console.log(id)
+    history.push('/try-model');
+  }
   return (
     <div>
       <div className="grid-container" >
@@ -74,7 +79,7 @@ function Grid({ onNewModel }) {
           <div>
             <div style={{ height: '50px' }}></div>
             <div style={{ width: '350px' }} className={`${resets.clapyResets} ${classes.root}`}>
-              <ModelCard_statusDefault id={item.id} title={item.title} description={item.description} modelImage={item.modelImage} onDelete={handleDelete} />
+              <ModelCard_statusDefault id={item.id} title={item.title} description={item.description} modelImage={item.modelImage} onDelete={handleDelete} onRun={handleRun} />
             </div>
           </div>
         ))}

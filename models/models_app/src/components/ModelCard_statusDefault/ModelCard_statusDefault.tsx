@@ -14,7 +14,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import deleteIcon from './icons/delete.png';
 import editIcon from './icons/edit.png';
 import mintIcon from './icons/mint.png';
-
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 import { ModelNameLogo_modelVariant2 } from './ModelNameLogo_modelVariant2/ModelNameLogo_modelVariant2.tsx';
 import React from 'react';
@@ -26,9 +26,10 @@ interface Props {
   description: string;
   modelImage: string;
   onDelete: (id:string, data: string) => void;
+  onRun : (id:string) => void;
 }
 /* @figmaId 7:288 */
-export const ModelCard_statusDefault: FC<Props> = memo(function ModelCard_statusDefault({id,title, description,modelImage, onDelete}: Props) {
+export const ModelCard_statusDefault: FC<Props> = memo(function ModelCard_statusDefault({id,title, description,modelImage, onDelete, onRun}: Props) {
   
   let imageSrc;
   if (modelImage === 'image-a') {
@@ -43,7 +44,12 @@ export const ModelCard_statusDefault: FC<Props> = memo(function ModelCard_status
 
 function handleClick(){
   console.log('Clicked delete button with id:', id);
-  onDelete(id, 'delete');
+  onDelete(id, title);
+}
+
+function handleRun(){
+  console.log('Clicked run button with id:', id);
+  onRun(id);
 }
   return (
     <div>
@@ -60,8 +66,8 @@ function handleClick(){
       <div className={classes.frame5}>
         <div className={classes.frame}>
           {/* <FrameIcon className={classes.icon}/> */}
-          <img src={editIcon} alt='edit' width='20' height='20' style={{marginLeft:'20px',marginRight: '10px'}}  / >
-       
+          {/* <img src={editIcon} alt='edit' width='20' height='20' style={{marginLeft:'20px',marginRight: '10px'}}  / >
+        */}
        {/* add some space between two images */}
 
 
@@ -70,9 +76,10 @@ function handleClick(){
         </div>
        
 
-
-    
-
+{/* change the color to blue */}
+        <div onClick={handleRun} className={classes.edit} style={{marginLeft:'12px', color: 'rgb(66,110,132)' }}>
+      <PlayArrowIcon width='20' height='20' />
+      </div>
         </div>
         <div className={classes.frame4}>
           <div className={classes.frame2}>

@@ -121,7 +121,7 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
         'created_time': new Date().toLocaleTimeString(),
         'description': descValue,
         'title': modelName,
-        'model_id': modelid,
+        'modelImage': `image-${basemodel.toLocaleLowerCase()}`,
         'creator':getCurrentUserWalletAddress(),
       });
       history.push('/models');
@@ -134,20 +134,21 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
       //http://localhost:4003/lookupft-0PyMlnD3Yq7Gnj2xLLpOl7KG  no id
       console.log('modelid', modelid);
       // var data;
-      const response = await fetch(`http://localhost:4003/lookupft-TxtaCcHdFwlN51KAZFkdkBAf`,{
+      var requestadd = modelid === "Have not created yet" ? `http://localhost:4003/lookupft-kqp2Xtf0LoPFGekt2iZEoyvq`: `http://localhost:4003/lookup${modelid}`;
+      const response = await fetch(requestadd,{
         method: 'POST'
       });
       const data = await response.json();
       // console.log('data***', data);
       await setTimeout(() => {
-        console.log(data.response);
-        if (data.response === "pending") {
-          setTimeout(handleLookup, 1000);
-          console.log('modelstatus', modelStatus);
-        } else {
-          console.log('modelstatus-finish', modelStatus);
-          setCurrentStatus('finished');
-        }
+          console.log(data.response);
+      if (data.response === "pending") {
+        setTimeout(handleLookup, 1000);
+        console.log('modelstatus', modelStatus);
+      } else {
+        console.log('modelstatus-finish', modelStatus);
+        setCurrentStatus('finished');
+      }
       }, 5000);
    
     } catch (error) {

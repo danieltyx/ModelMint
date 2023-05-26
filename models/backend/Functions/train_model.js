@@ -34,7 +34,7 @@ async function trainModel(csvFilePath) {
       var user_id = openai_key.substring(3, 9);
       json_file_name = "output" + n + user_id + ".jsonl";
       console.log(json_file_name);
-      jsonlFilePath = json_file_name;
+      jsonlFilePath = json_file_name.trim();
   }
 
   async function csvToJsonl(){
@@ -101,7 +101,7 @@ async function trainModel(csvFilePath) {
       createOutputName();
       await csvToJsonl();
       const file_name = await uploadFile();
-      console.log('jsonlFilePath: ',jsonlFilePath);
+      console.log('jsonlFilePath:',jsonlFilePath.trim());
       console.log("fileName: ",file_name);
       await createFineTune(file_name);
       // await lookupStatus(model_id);

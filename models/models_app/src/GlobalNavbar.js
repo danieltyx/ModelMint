@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from "react";
-import {setCurrentUserWalletAddress, getCurrentUserWalletAddress} from './globalVariable';
+import React, { useState, useEffect } from "react";
+import { setCurrentUserWalletAddress, getCurrentUserWalletAddress } from './globalVariable';
 import './GlobalNavbar.css';
 import { TextField, Input } from '@mui/material';
 import WriteToFirestore from './firebaseFunctions/WriteToFirestore';
@@ -21,12 +21,27 @@ const db = firebase.firestore();
 function GlobalNavbar() {
 
     const [walletAddress, setWalletAddress] = useState('null');
+    const [showPopup, setShowPopup] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+
     const MMSDK = new MetaMaskSDK();
     const ethereum = MMSDK.getProvider();
 
 
-    function handleConnect() {
-        window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] })
+
+    function handlePopupInputChange(event) {
+        setInputValue(event.target.value);
+      }
+    
+      function handlePopupSubmit() {
+        // Do something with the input value
+        console.log(inputValue);
+        setShowPopup(false);
+      }
+
+      
+    async function handleConnect() {
+        await window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] })
             .then(() => {
                 console.log('Wallet connected successfully.');
                 setWalletAddress(window.ethereum.selectedAddress);
@@ -38,10 +53,15 @@ function GlobalNavbar() {
                 setCurrentUserWalletAddress(window.ethereum.selectedAddress);
                 console.log(getCurrentUserWalletAddress());
                 WriteToFirestore('Users', window.ethereum.selectedAddress, { 'created_time': new Date().toLocaleTimeString() });
+            }).then(() => {
+                setShowPopup(true);
             })
+
             .catch((error) => {
                 console.error('Failed to connect wallet:', error);
             });
+
+
     }
     useEffect(() => {
         const storedWalletAddress = localStorage.getItem('walletAddress');
@@ -59,24 +79,34 @@ function GlobalNavbar() {
 
                 {/* when img1 onClicked link to /marketplace */}
                 <a href="/marketplace">
-                    <img className="img1" src={ModelGPTLogo} alt="Logo"  style={{ display: 'inline-block', padding: '0', marginLeft:'300px', lineHeight: '0' }}/>
+                    <img className="img1" src={ModelGPTLogo} alt="Logo" style={{ display: 'inline-block', padding: '0', marginLeft: '300px', lineHeight: '0' }} />
                 </a>
                 <div className="search-bar">
-                <input type="text" placeholder="Search Models"  style={{ backgroundColor: 'transparent', 
-                width: '500px' , borderColor:'transparent', 
-                borderWidth:'0px', fontSize:'16px',
-                color:"white",
-                opacity:"0.7", outline: 'none' }}  />
+                    <input type="text" placeholder="Search Models" style={{
+                        backgroundColor: 'transparent',
+                        width: '500px', borderColor: 'transparent',
+                        borderWidth: '0px', fontSize: '16px',
+                        color: "white",
+                        opacity: "0.7", outline: 'none'
+                    }} />
                 </div>
                 {(getCurrentUserWalletAddress() != null) ? (
                     // display the first 4 and last 4 digits of the wallet address
-                    <div>
-                    <a href="/models"> <h1>Creator Space</h1></a>
+                    <div >
+                        <a href="/models"> <h1 className="creator-space">Creator Space</h1></a>
 
-                       
-                    {/* <p>{getCurrentUserWalletAddress().substring(0, 4) + "..." + getCurrentUserWalletAddress().substring(getCurrentUserWalletAddress().length - 4)}</p> */}
+
+                        {/* <p>{getCurrentUserWalletAddress().substring(0, 4) + "..." + getCurrentUserWalletAddress().substring(getCurrentUserWalletAddress().length - 4)}</p> */}
                     </div>
-                ):(            <img className="img2" src={connectLogo} onClick={handleConnect} alt="Logo" />)}
+                ) : (<img className="img2" src={connectLogo} onClick={handleConnect} alt="Logo" />)}
+
+                {showPopup && (
+                    <div>
+                        <input type="text" value={inputValue} onChange={handlePopupInputChange} />
+                        <button onClick={handlePopupSubmit}>Submit</button>
+                    </div>
+                )}
+
             </div>
         </div>
     )

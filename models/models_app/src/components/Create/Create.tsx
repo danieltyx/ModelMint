@@ -149,6 +149,7 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
       } else {
         console.log('modelstatus-finish', modelStatus);
         setfinetunedmodel(data.response);
+        console.log('Create.tsx: finetunedmodel', data.response);
         setCurrentStatus('finished');
       }
       }, 5000);

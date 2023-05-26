@@ -27,9 +27,10 @@ interface Props {
   modelImage: string;
   onDelete: (id:string, data: string) => void;
   onRun : (id:string) => void;
+  onMint: (id:string) => void;
 }
 /* @figmaId 7:288 */
-export const ModelCard_statusDefault: FC<Props> = memo(function ModelCard_statusDefault({id,title, description,modelImage, onDelete, onRun}: Props) {
+export const ModelCard_statusDefault: FC<Props> = memo(function ModelCard_statusDefault({id,title, description,modelImage, onDelete, onRun, onMint}: Props) {
   
   let imageSrc;
   if (modelImage === 'image-a') {
@@ -50,6 +51,11 @@ function handleClick(){
 function handleRun(){
   console.log('Clicked run button with id:', id);
   onRun(id);
+}
+
+function handleMint(){
+  console.log('Clicked mint button with id:', id);
+  onMint(id);
 }
   return (
     <div>
@@ -88,7 +94,7 @@ function handleRun(){
 
           </div>
           {/* <div className={classes.run}>Run</div> */}
-          <img src={mintIcon} alt='edit' width='80' height='30' style={{marginRight:'10px'}} / >
+          <img onClick={handleMint} src={mintIcon} alt='edit' width='80' height='30' style={{marginRight:'10px'}} / >
         </div>
       </div>
       <div style={{marginTop:'-15px'}} className={classes.modelNameGPT3}>{title}</div>

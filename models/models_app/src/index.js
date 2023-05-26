@@ -7,6 +7,8 @@ import GlobalNavbar from './GlobalNavbar.js';
 import CreateModelPage from './CreateModelPage.js';
 import useModel from './useModel.js';
 import Setup from './Setup.js';
+import MintModelPage from './MintModelPage.js';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
@@ -20,6 +22,7 @@ root.render(
         <Route path="/marketplace" component={NewPage}/> 
         <Route path="/create-model" component={CreateModelPage}/>
         <Route path="/try-model" component={useModel}/>
+        <Route path='/mint-model' component={MintModelPage}/>
       </Switch>
       </BrowserRouter>
       </div>

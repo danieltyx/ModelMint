@@ -73,6 +73,12 @@ function Grid({ onNewModel }) {
     console.log(id)
     history.push(`/try-model?id=${id}`);
   }
+
+  function handleMint(id) {
+    console.log(id)
+    history.push(`/mint-model?id=${id}`);
+  }
+  
   if (isLoading) {
     <div className="grid-container" >
     <Box sx={{ display: 'flex' }}>
@@ -91,7 +97,7 @@ function Grid({ onNewModel }) {
           <div>
             <div style={{ height: '50px' }}></div>
             <div style={{ width: '350px' }} className={`${resets.clapyResets} ${classes.root}`}>
-              <ModelCard_statusDefault id={item.id} title={item.title} description={item.description} modelImage={item.modelImage} onDelete={handleDelete} onRun={handleRun} />
+              <ModelCard_statusDefault id={item.id} title={item.title} description={item.description} modelImage={item.modelImage} onDelete={handleDelete} onRun={handleRun} onMint={handleMint} />
             </div>
           </div>
         ))}

@@ -15,7 +15,7 @@ import 'firebase/firestore';
 import ReadFromFirestoreAll from './firebaseFunctions/ReadFromFirestoreAll';
 import MetaMaskSDK from '@metamask/sdk';
 import MyPopup from './MyPopup';
-import { Button } from 'react-bootstrap';
+import { Button, Stack } from 'react-bootstrap';
 
 
 const db = firebase.firestore();
@@ -31,10 +31,28 @@ function GlobalNavbar({setShowPopup}) {
     const ethereum = MMSDK.getProvider();
 
 
+    window.addEventListener('load', checkAuth);
+
+    function checkAuth() {
+        const authToken = localStorage.getItem('authToken');
+        if (authToken) {
+          setCurrentUserWalletAddress(authToken);
+          console.log('authed', getCurrentUserWalletAddress());   
+        } else {
+            console.log('not authed');
+        } 
+      }
 
 
     function handlePopupInputChange(event) {
         setInputValue(event.target.value);
+      }
+
+      function handleLogout() {
+        // perform logout logic
+        console.log('logout');
+        localStorage.removeItem('authToken');
+        window.location.reload();
       }
     
       function handlePopupSubmit() {
@@ -45,6 +63,8 @@ function GlobalNavbar({setShowPopup}) {
 
       
     async function handleConnect() {
+
+
         await window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] })
             .then(() => {
                 console.log('Wallet connected successfully.');
@@ -58,9 +78,8 @@ function GlobalNavbar({setShowPopup}) {
             }).then(() => {
                 setCurrentUserWalletAddress(window.ethereum.selectedAddress);
                 console.log(getCurrentUserWalletAddress());
-
+                localStorage.setItem('authToken', getCurrentUserWalletAddress());
             })
-
             .catch((error) => {
                 console.error('Failed to connect wallet:', error);
             });
@@ -94,10 +113,15 @@ function GlobalNavbar({setShowPopup}) {
                         opacity: "0.7", outline: 'none'
                     }} />
                 </div>
-                {(getCurrentUserWalletAddress() != null) ? (
+
+                
+                {((localStorage.getItem('authToken') != null)) ? (
                     // display the first 4 and last 4 digits of the wallet address
                     <div >
+                        <Stack direction="column" gap={3}>
                         <a href="/models"> <h1 className="creator-space">Creator Space</h1></a>
+                        <a onClick={handleLogout}> <h1 className="creator-space">Log Out</h1></a>
+                    </Stack>
 
 
                         {/* <p>{getCurrentUserWalletAddress().substring(0, 4) + "..." + getCurrentUserWalletAddress().substring(getCurrentUserWalletAddress().length - 4)}</p> */}

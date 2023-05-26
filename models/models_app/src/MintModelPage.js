@@ -9,9 +9,13 @@ interface Props {
   className?: string;
 }
 export const MintModelPage: FC<Props> = memo(function App(props = {}) {
+  function handleMint() {
+    console.log("mint clikced");
+    //Nick: start your code here 
+  }
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
-      <MintModel />
+      <MintModel onMint={handleMint}/>
     </div>
   );
 });

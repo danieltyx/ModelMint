@@ -36,9 +36,14 @@ interface Props {
     iconCollection2?: boolean;
     iconCollection3?: boolean;
   };
+  onMint: (token_id: string) => void;
 }
 /* @figmaId 331:4474 */
-export const MintModel: FC<Props> = memo(function MintModel(props = {}) {
+export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
+  function handleMintClick(){
+    props.onMint('token_id');
+  }
+  
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
       <div className={classes.frame2659}>
@@ -237,6 +242,7 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {}) {
           />
         </div>
       </div>
+      <div onClick={handleMintClick}>
       <MintBottomBar_status2MintingEx
         className={classes.mintBottomBar}
         classes={{ union: classes.union2 }}
@@ -244,6 +250,8 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {}) {
           warning: <WarningIcon className={classes.icon11} />,
         }}
       />
+      </div>
+
       <div className={classes.modelCard}></div>
       <div className={classes.frame2778}>
         <div className={classes.frame431}>

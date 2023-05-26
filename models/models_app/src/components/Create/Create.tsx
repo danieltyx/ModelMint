@@ -66,7 +66,7 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
   const [currentstatus, setCurrentStatus] = useState("available");
   // available, training, finished
   const [modelStatus, setModelStatus] = useState(null);
-
+  const [finetunedmodel, setfinetunedmodel] = useState(null);
 
 
 
@@ -123,6 +123,7 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
         'title': modelName,
         'modelImage': `image-${basemodel.toLocaleLowerCase()}`,
         'creator':getCurrentUserWalletAddress(),
+        'model_id': finetunedmodel,
       });
       history.push('/models');
     }
@@ -147,6 +148,7 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
         console.log('modelstatus', modelStatus);
       } else {
         console.log('modelstatus-finish', modelStatus);
+        setfinetunedmodel(data.response);
         setCurrentStatus('finished');
       }
       }, 5000);

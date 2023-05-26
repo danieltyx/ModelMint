@@ -30,7 +30,9 @@ export const GenerateOutput_statusDefault2: FC<Props> = memo(function GenerateOu
           ),
         }}
       />
-      <div className={classes.createAModel}>Generate output</div>
+      <div  className={classes.createAModel}>
+        Generate output
+        </div>
     </div>
   );
 });

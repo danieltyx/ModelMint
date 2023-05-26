@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import type { FC } from 'react';
-
+import React,{useState} from 'react';
 import resets from '../_resets.module.css';
 import { Auto_read_playIcon } from './Auto_read_playIcon';
 import { Content_copy_statusDefault } from './Content_copy_statusDefault/Content_copy_statusDefault';
@@ -10,6 +10,8 @@ import { PromptInputComplete_promptDefa } from './PromptInputComplete_promptDefa
 import classes from './RunningModel.module.css';
 import { Thumb_up_statusDefault } from './Thumb_up_statusDefault/Thumb_up_statusDefault';
 import { UnionIcon } from './UnionIcon';
+import { useContext } from 'react';
+import { modelInputContext } from '../../../Contexts/modelInputContext';
 
 interface Props {
   className?: string;
@@ -20,9 +22,50 @@ interface Props {
 }
 /* @figmaId 487:5630 */
 export const RunningModel: FC<Props> = memo(function RunningModel(props = {}) {
+  const [postContent, setPostContent] = useState('');
+  const [modeloutput, setModelOutput] = useState('Experience the magic of AI unfold before your eyes! Once you enter your prompt in the designated field below, the model will generate a personalized output just for you. Your fascinating results will appear shortly after submitting your prompt. ');
+  async function handlePostContentChange(newPostContent: string) {
+    setPostContent(newPostContent);
+    console.log(newPostContent);
+
+    console.log(props.modelId);
+
+    const url = "http://localhost:4003/trymodel";
+  
+    // Define the JSON content
+    const data = {
+      "model_id": props.modelId, 
+      "prompt": newPostContent
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      // If the response was ok, retrieve and handle the JSON data
+      const json = await response.json();
+      console.log(json.response.trim());
+      setModelOutput(json.response.trim());
+    } catch (error) {
+      console.error("There was a problem with the fetch operation: " + error.message);
+    }
+
+    
+  }
   function handleBack(){
     window.history.back();
   }
+
+  const my_output = modeloutput;
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
       <div className={classes.nikuowwi_large_dark_chamber_wi}></div>
@@ -37,9 +80,9 @@ export const RunningModel: FC<Props> = memo(function RunningModel(props = {}) {
       <div className={classes.prompt}>Prompt</div>
       <div className={classes.rectangle336}></div>
       <div className={classes.anOpenCityIsACityThatHasBeenDe}>
-        An open city is a city that has been declared neutral and is not defended against attack. This usually occurs
-        when the defending forces realize they cannot hold the city against the attacking forces and decide to spare the
-        civilian population from the horrors of urban warfare.
+
+        {my_output}
+        
       </div>
       <div className={classes.frame2733}>
         <div className={classes.output}>Output</div>
@@ -59,6 +102,7 @@ export const RunningModel: FC<Props> = memo(function RunningModel(props = {}) {
             </div>
           ),
         }}
+        onPostContentChange={handlePostContentChange}
       />
       <div className={classes.testRun}>Test run</div>
       <div className={classes.frame2811}>

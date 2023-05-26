@@ -61,8 +61,13 @@ function GlobalNavbar() {
                 <a href="/marketplace">
                     <img className="img1" src={ModelGPTLogo} alt="Logo"  style={{ display: 'inline-block', padding: '0', marginLeft:'300px', lineHeight: '0' }}/>
                 </a>
-                <input type="text" placeholder="Search Models" />
-       
+                <div className="search-bar">
+                <input type="text" placeholder="Search Models"  style={{ backgroundColor: 'transparent', 
+                width: '500px' , borderColor:'transparent', 
+                borderWidth:'0px', fontSize:'16px',
+                color:"white",
+                opacity:"0.7", outline: 'none' }}  />
+                </div>
                 {(getCurrentUserWalletAddress() != null) ? (
                     // display the first 4 and last 4 digits of the wallet address
                     <div>

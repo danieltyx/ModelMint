@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import classes from './App.module.css';
 import resets from './components/_resets.module.css';
 import { Create } from './components/Create/Create.tsx';
+import { getCurrentUserOpenAIKey } from "./globalVariable";
 
 function CreateModelPage()
 {
@@ -11,9 +12,25 @@ function CreateModelPage()
     setModelName(nameValue);
     console.log(modelName);
   };
+
+  async function handleSetupKey() {
+    try {
+      // var data;
+      var requestadd = `http://localhost:4003/setkey${getCurrentUserOpenAIKey()}`;
+      const response = await fetch(requestadd,{
+        method: 'POST'
+      });
+      const data = await response.json();
+      console.log(data)
+    } catch (error) {
+      console.error("Error set up key", error);
+    }
+  }
+  
          return (
-    <div className={`${resets.clapyResets} ${classes.root}`}>
+    <div onClick={handleSetupKey} className={`${resets.clapyResets} ${classes.root}`}>
       <Create onNameChange={handleNameChange} />
     </div>)
 }
 export default CreateModelPage;
+

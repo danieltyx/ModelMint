@@ -6,15 +6,16 @@ import ModelMainPage from './ModelMainPage.js';
 import GlobalNavbar from './GlobalNavbar.js';
 import CreateModelPage from './CreateModelPage.js';
 import useModel from './useModel.js';
-
+import Setup from './Setup.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 
 root.render(
 <div>
+  <Setup/>
 <BrowserRouter> 
      {/* <Navbar/> */}
-     <GlobalNavbar/>
-     <Switch> 
+     <Switch>
         <Route exact path="/models" component={ModelMainPage} />
         <Route path="/marketplace" component={NewPage}/> 
         <Route path="/create-model" component={CreateModelPage}/>

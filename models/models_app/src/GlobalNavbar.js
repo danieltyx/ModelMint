@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { setCurrentUserWalletAddress, getCurrentUserWalletAddress } from './globalVariable';
+import { setCurrentUserWalletAddress, getCurrentUserWalletAddress, getCurrentUserOpenAIKey } from './globalVariable';
 import './GlobalNavbar.css';
 import { TextField, Input } from '@mui/material';
 import WriteToFirestore from './firebaseFunctions/WriteToFirestore';
@@ -14,18 +14,22 @@ import { collection, getDocs } from "firebase/firestore";
 import 'firebase/firestore';
 import ReadFromFirestoreAll from './firebaseFunctions/ReadFromFirestoreAll';
 import MetaMaskSDK from '@metamask/sdk';
+import MyPopup from './MyPopup';
+import { Button } from 'react-bootstrap';
+
 
 const db = firebase.firestore();
 
 
-function GlobalNavbar() {
+function GlobalNavbar({setShowPopup}) {
 
     const [walletAddress, setWalletAddress] = useState('null');
-    const [showPopup, setShowPopup] = useState(false);
+    // const [showPopup, setShowPopup] = useState(false);
     const [inputValue, setInputValue] = useState('');
 
     const MMSDK = new MetaMaskSDK();
     const ethereum = MMSDK.getProvider();
+
 
 
 
@@ -36,7 +40,7 @@ function GlobalNavbar() {
       function handlePopupSubmit() {
         // Do something with the input value
         console.log(inputValue);
-        setShowPopup(false);
+        // setShowPopup(false);
       }
 
       
@@ -50,11 +54,11 @@ function GlobalNavbar() {
                 // console.log(window.ethereum.selectedAddress)
 
             }).then(() => {
+                setShowPopup();
+            }).then(() => {
                 setCurrentUserWalletAddress(window.ethereum.selectedAddress);
                 console.log(getCurrentUserWalletAddress());
-                WriteToFirestore('Users', window.ethereum.selectedAddress, { 'created_time': new Date().toLocaleTimeString() });
-            }).then(() => {
-                setShowPopup(true);
+
             })
 
             .catch((error) => {
@@ -99,13 +103,10 @@ function GlobalNavbar() {
                         {/* <p>{getCurrentUserWalletAddress().substring(0, 4) + "..." + getCurrentUserWalletAddress().substring(getCurrentUserWalletAddress().length - 4)}</p> */}
                     </div>
                 ) : (<img className="img2" src={connectLogo} onClick={handleConnect} alt="Logo" />)}
-
-                {showPopup && (
-                    <div>
-                        <input type="text" value={inputValue} onChange={handlePopupInputChange} />
-                        <button onClick={handlePopupSubmit}>Submit</button>
-                    </div>
-                )}
+                 {/* <Button variant="primary" onClick={setShowPopup}>
+                    Launch demo modal
+                </Button> */}
+             
 
             </div>
         </div>

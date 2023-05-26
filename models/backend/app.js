@@ -11,9 +11,21 @@ const { getFirestore, collection, doc, setDoc,getDoc,deleteDoc, addDoc } = requi
 const fs = require('fs');
 const { lookupStatus } = require('./Functions/lookupStatus');
 const {use_model } = require('./Functions/use_model');
+const { set_openai_key,get_openai_key } = require('./openaiConfig');
+const { get } = require('http');
 var csvFilePath = "test.csv";
 app.use(cors());
 app.use(express.json());
+
+
+app.post('/setkey:key', async (req, res) => {
+    const key  = req.params.key;
+    set_openai_key(key);
+    // console.log("openai_key: ", get_openai_key());
+    res.send({
+        response: "success"
+    });
+});
 
 app.post('/trymodel', async (req, res) => {
     const { prompt, model_id  } = req.body;

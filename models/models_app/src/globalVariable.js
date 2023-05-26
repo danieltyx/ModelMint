@@ -8,3 +8,14 @@ export function setCurrentUserWalletAddress(address) {
 export function getCurrentUserWalletAddress() {
   return _currentUserWalletAddress;
 }
+
+
+let _currentUserOpenAIKey = null;
+
+export function setCurrentUserOpenAIKey(key) {
+  _currentUserOpenAIKey = key;
+}
+
+export function getCurrentUserOpenAIKey() {
+  return _currentUserOpenAIKey;
+}

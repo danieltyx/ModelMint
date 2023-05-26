@@ -91,7 +91,7 @@ function handleRun(){
           <img src={mintIcon} alt='edit' width='80' height='30' style={{marginRight:'10px'}} / >
         </div>
       </div>
-      <div className={classes.modelNameGPT3}>{title}</div>
+      <div style={{marginTop:'-15px'}} className={classes.modelNameGPT3}>{title}</div>
 
     
       {/* insert image in model_image folder */}

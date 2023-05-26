@@ -1,6 +1,7 @@
 .generateOutput.generateOutput {
-  right: 39.5103px;
-  top: 56.0694%;
+  position: relative;
+  right: -60%;
+  top: -40%;
   bottom: 16.185%;
   height: initial;
 }

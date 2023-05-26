@@ -19,7 +19,7 @@ interface Props {
 export const GenerateOutput_statusDefault: FC<Props> = memo(function GenerateOutput_statusDefault(props = {}) {
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
-      <div className={classes.rectangle335}></div>
+      <div className={classes.rectangle335} ></div>
       <GenerateOutput_statusDefault2
         className={classes.generateOutput}
         classes={{ auto_read_play: `${props.classes?.auto_read_play || ''} ${classes.auto_read_play}` }}

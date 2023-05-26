@@ -12,17 +12,15 @@ import ReadFromFirestore from './firebaseFunctions/ReadFromFirestore';
 import ReadFromFirestoreAll from './firebaseFunctions/ReadFromFirestoreAll';
 import { useHistory } from 'react-router-dom';
 import DeletefromFirestore from './firebaseFunctions/Deletefromfirestore';
+import Skeleton from '@mui/material/Skeleton';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import { colors } from '@mui/material';
+
 
 function Grid({ onNewModel }) {
   const history = useHistory();
-  var initialData = [
-    { id: 1, title: 'GPT-3', description: 'GPT-3 is an autoregressive language model that uses deep learning to produce human-like text.', modelImage: 'image-a' },
-    { id: 2, title: 'GPT-4', description: 'GPT-4 is a larger and more advanced version of GPT-3 that can generate even more sophisticated text.', modelImage: 'image-b' },
-    { id: 3, title: 'ChatGPT', description: 'ChatGPT is a special version of the GPT model that is designed for generating conversational responses.', modelImage: 'image-c' },
-    { id: 4, title: 'BSGPT', description: 'BSGPT is purely BS', modelImage: 'image-d' },
-    // Add more items as needed
-  ];
-
+  var initialData =[];
   // ReadFromFirestoreAll('models').then((data) => {
   //   initialData=data;
   //   // console.log(initialData);
@@ -30,15 +28,17 @@ function Grid({ onNewModel }) {
 
   const [data, setData] = useState(initialData);
   const [nextId, setNextId] = useState(7);
-
+  const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
     const fetchData = async () => {
       const initialData = await ReadFromFirestoreAll("models");
       setData(initialData);
+      setIsLoading(false);
     };
     fetchData();
   }, []);
-
+  
 
 
   function handleClick() {
@@ -73,9 +73,20 @@ function Grid({ onNewModel }) {
     console.log(id)
     history.push(`/try-model?id=${id}`);
   }
+  if (isLoading) {
+    <div className="grid-container" >
+    <Box sx={{ display: 'flex' }}>
+    <CircularProgress color="secondary" />
+    <CircularProgress color="success" />
+    <CircularProgress color="inherit" />
+
+  </Box>
+  </div>
+  }
+
   return (
     <div>
-      <div className="grid-container" >
+      <div className="grid-container" style={{width:'55%'}} >
         {data.map((item) => (
           <div>
             <div style={{ height: '50px' }}></div>

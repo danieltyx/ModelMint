@@ -50,7 +50,7 @@ export const RunningModel: FC<Props> = memo(function RunningModel(props = {}) {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-  
+      
       // If the response was ok, retrieve and handle the JSON data
       const json = await response.json();
       console.log(json.response.trim());

@@ -21,17 +21,18 @@ app.use(express.json());
 app.post('/setkey:key', async (req, res) => {
     const key  = req.params.key;
     set_openai_key(key);
-    // console.log("openai_key: ", get_openai_key());
+    console.log("openai_key: ", get_openai_key());
     res.send({
         response: "success"
     });
 });
 
-app.post('/trymodel', async (req, res) => {
+app.post('/trymodel:key', async (req, res) => {
+    const key  = req.params.key;
     const { prompt, model_id  } = req.body;
     console.log("model_id: ", model_id);
     console.log("prompt: ", prompt);
-    use_model(prompt,model_id).then((response) => {
+    use_model(prompt,model_id,key).then((response) => {
         console.log("response: ", response);
         res.send({
             response: response

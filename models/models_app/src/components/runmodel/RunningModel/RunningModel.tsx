@@ -12,6 +12,12 @@ import { Thumb_up_statusDefault } from './Thumb_up_statusDefault/Thumb_up_status
 import { UnionIcon } from './UnionIcon';
 import { useContext } from 'react';
 import { modelInputContext } from '../../../Contexts/modelInputContext';
+import {getCurrentUserOpenAIKey, getCurrentUserWalletAddress} from '../../../globalVariable';
+import ReadFromfirestore from '../../../firebaseFunctions/ReadFromFirestore.js';
+
+
+
+
 
 interface Props {
   className?: string;
@@ -24,40 +30,57 @@ interface Props {
 export const RunningModel: FC<Props> = memo(function RunningModel(props = {}) {
   const [postContent, setPostContent] = useState('');
   const [modeloutput, setModelOutput] = useState('Experience the magic of AI unfold before your eyes! Once you enter your prompt in the designated field below, the model will generate a personalized output just for you. Your fascinating results will appear shortly after submitting your prompt. ');
+  const [key,setkey]  = useState('');
+ 
+ 
+async function handleRunModel(url,data){
+  try {
+    const response = await fetch(url, {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // If the response was ok, retrieve and handle the JSON data
+    const json = await response.json();
+    console.log(json.response.trim());
+    setModelOutput(json.response.trim());
+  } catch (error) {
+    console.error("There was a problem with the fetch operation: " + error.message);
+  }
+} 
+ 
+ 
   async function handlePostContentChange(newPostContent: string) {
     setPostContent(newPostContent);
     console.log(newPostContent);
 
     console.log(props.modelId);
+    
+    console.log('userid', getCurrentUserWalletAddress());
+    ReadFromfirestore('Users', getCurrentUserWalletAddress()).
+    then((data) => {
+      console.log('firebase: ', data.open_ai_key);
+      setkey(data.open_ai_key);
+      console.log('key: ', key);
+      console.log('kedata.open_ai_key: ', data.open_ai_key);
+      handleRunModel(`http://localhost:4003/trymodel${data.open_ai_key.trim()}`,{
+        "model_id": props.modelId, 
+        "prompt": newPostContent
+      } );
+    })
+    // const data = {
+    //   "model_id": props.modelId, 
+    //   "prompt": newPostContent
+    // };
 
-    const url = "http://localhost:4003/trymodel";
-  
-    // Define the JSON content
-    const data = {
-      "model_id": props.modelId, 
-      "prompt": newPostContent
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: "POST", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      // If the response was ok, retrieve and handle the JSON data
-      const json = await response.json();
-      console.log(json.response.trim());
-      setModelOutput(json.response.trim());
-    } catch (error) {
-      console.error("There was a problem with the fetch operation: " + error.message);
-    }
+   
 
     
   }

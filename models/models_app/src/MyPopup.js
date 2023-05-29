@@ -24,7 +24,23 @@ function MyPopup({show, handleShow,handleClose }) {
       'open_ai_key': getCurrentUserOpenAIKey(),
   });
 
-    handleClose();
+  async function handleSetupKey() {
+    try {
+      // var data;
+      var requestadd = `http://localhost:4003/setkey${getCurrentUserOpenAIKey()}`;
+      const response = await fetch(requestadd,{
+        method: 'POST'
+      });
+      const data = await response.json();
+      console.log(data)
+    } catch (error) {
+      console.error("Error set up key", error);
+    }
+  }
+  
+  handleSetupKey();
+
+  handleClose();
   }
 
   console.log(show);

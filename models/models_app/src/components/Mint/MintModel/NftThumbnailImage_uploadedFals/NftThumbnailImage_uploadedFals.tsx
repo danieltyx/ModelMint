@@ -22,15 +22,15 @@ interface Props {
 export const NftThumbnailImage_uploadedFals: FC<Props> = memo(function NftThumbnailImage_uploadedFals(props = {}) {
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
-      <SelectACSVFile_statusDefault
+      {/* <SelectACSVFile_statusDefault
         swap={{
           upload_file: props.swap?.upload_file || <Upload_fileIcon className={classes.icon} />,
         }}
         text={{
           selectFileCSV: <div className={classes.selectFileCSV}>Upload from file (.jpg / .png)</div>,
         }}
-      />
-      <div className={classes.or}>or</div>
+      /> */}
+      {/* <div className={classes.or}>or</div> */}
       <GenerateThumbnail_statusDefaul
         classes={{ add_photo_alternate: `${props.classes?.add_photo_alternate || ''} ${classes.add_photo_alternate}` }}
         swap={{

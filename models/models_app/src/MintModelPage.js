@@ -4,6 +4,7 @@ import classes from './App.module.css';
 import resets from './components/Mint/_resets.module.css';
 import { MintModel } from './components/Mint/MintModel/MintModel';
 import { ethers } from 'ethers';
+import { useHistory } from 'react-router-dom';
 
 interface Props {
   className?: string;
@@ -57,6 +58,12 @@ export const MintModelPage: FC<Props> = memo(function App(props = {}) {
     await transaction.wait();
 
     console.log(`Sent token #${tokenId} to ${userAddress}!`);
+ 
+  const history = useHistory();
+    function handleMint() {
+    console.log("mint clikced");
+    history.push('/models');
+    //Nick: start your code here 
   }
 
   return (

@@ -199,11 +199,12 @@
   height: 100%;
 }
 .root {
+  top:0px;
   left: 100px;
   background-color: 'transparent';
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   align-items: flex-start;
   background-color: #171717, #3a829e08, #0f0f0f;
   overflow-y: auto;
@@ -455,4 +456,24 @@
   height: min-content;
   white-space: nowrap;
   flex-direction: column;
+}
+
+.text-field-input{
+
+  box-sizing: border-box;
+  
+  /* Auto layout */
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  
+  width: 426px;
+  height: 49px;
+  
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+
 }

@@ -1,6 +1,7 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import type { FC } from 'react';
-
+import { useState } from 'react';
+import React from 'react';
 import resets from '../_resets.module.css';
 import { Add_photo_alternateIcon } from './Add_photo_alternateIcon';
 import { BrushIcon } from './BrushIcon';
@@ -28,6 +29,9 @@ import { Sports_basketballIcon } from './Sports_basketballIcon';
 import { TextField_statusDefaultProperE } from './TextField_statusDefaultProperE/TextField_statusDefaultProperE';
 import { Upload_fileIcon } from './Upload_fileIcon';
 import { WarningIcon } from './WarningIcon';
+import {useHistory} from 'react-router-dom';
+import NFTtokenPairs from '../../../mintedNFT.js';
+import CircularProgress from '@mui/material/CircularProgress';
 
 interface Props {
   className?: string;
@@ -40,10 +44,72 @@ interface Props {
 }
 /* @figmaId 331:4474 */
 export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
+  const history = useHistory();
   function handleMintClick(){
     props.onMint('token_id');
   }
+
+  function handleback(){
+    window.history.back();
+  }
+  const [tokenNumber, settokenNumber] = useState('');
+  const [creatorEarning, setcreatorEarning] = useState('');
+  const [floorPrice, setfloorPrice] = useState('');
+
+  function handletokenNumberChange(event: React.ChangeEvent<HTMLInputElement>) {
+    settokenNumber(event.target.value);
+  }
+  function handlecreatorEarningChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setcreatorEarning(event.target.value);
+  }
+  function handlefloorPriceChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setfloorPrice(event.target.value);
+  }
+
+  const [artCate,setartCate] = useState(false);
+  const [sportCate,setsportCate] = useState(false);
+  const [productivityCate,setproductivityCate] = useState(false);
+  const [codingCate,setcodingCate] = useState(false);
+  const [medicalCate,setmedicalCate] = useState(false);
+  const [legalCate,setlegalCate] = useState(false);
+
+  function handleartCate(){
+    setartCate(!artCate);
+  }
+  function handlesportCate(){
+    setsportCate(!sportCate);
+  }
+  function handleproductivityCate(){
+    setproductivityCate(!productivityCate);
+  }
+  function handlecodingCate(){
+    setcodingCate(!codingCate);
+  }
+  function handlemedicalCate(){
+    setmedicalCate(!medicalCate);
+  }
+  function handlelegalCate(){
+    setlegalCate(!legalCate);
+  }
   
+  const [displayNFT, setdisplayNFT] = useState(false);
+  const [loadingNFT, setloadingNFT] = useState(false);
+
+
+  function handleGenerateImage(){
+      // Simulate fetching NFT token pairs
+
+      setTimeout(() => {
+        setloadingNFT(true);
+      }, 1000);
+      console.log(loadingNFT);
+      setTimeout(() => {
+        setdisplayNFT(true);
+        setloadingNFT(false);
+      }, 10000);
+     
+  }
+
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
       <div className={classes.frame2659}>
@@ -51,7 +117,7 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
           <div className={classes.frame2654}>
             <div className={classes.numberOfTokens}>Number of tokens</div>
           </div>
-          <TextField_statusDefaultProperE
+          {/* <TextField_statusDefaultProperE
             swap={{
               iconCollection: (
                 <IconCollection_iconNumberStatu
@@ -72,7 +138,19 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
             text={{
               eGNameGPT: <div className={classes.eGNameGPT}>1 - 10,000</div>,
             }}
-          />
+          /> */}
+
+          <div className='text-field-input'>
+           <input type="text" placeholder="# 1 - 10,000" style={{
+                        backgroundColor: 'transparent',
+                        width: '500px', borderColor: 'transparent',
+                        borderWidth: '0px', fontSize: '16px',
+                        color: "white",
+                        opacity: "0.7", outline: 'none'
+                    }} 
+                    value={tokenNumber}
+                    onChange={handletokenNumberChange}/>
+            </div>
         </div>
         <div className={classes.frame2785}>
           <div className={classes.frame2787}>
@@ -83,7 +161,7 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
               Percentage of payment you earn per transaction.{' '}
             </div>
           </div>
-          <TextField_statusDefaultProperE
+          {/* <TextField_statusDefaultProperE
             swap={{
               iconCollection: (
                 <IconCollection_iconStatusDefau
@@ -104,7 +182,16 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
             text={{
               eGNameGPT: <div className={classes.eGNameGPT2}>1-100</div>,
             }}
-          />
+          /> */}
+                     <input type="text" placeholder="% 1 - 100" style={{
+                        backgroundColor: 'transparent',
+                        width: '500px', borderColor: 'transparent',
+                        borderWidth: '0px', fontSize: '16px',
+                        color: "white",
+                        opacity: "0.7", outline: 'none'
+                    }} 
+                    value={creatorEarning}
+                    onChange={handlecreatorEarningChange}/>
         </div>
         <div className={classes.frame2660}>
           <div className={classes.frame2786}>
@@ -115,7 +202,7 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
               The base price per every individual token. 1 NFT = 100 prompt that the user enters.{' '}
             </div>
           </div>
-          <TextField_statusDefaultProperE
+          {/* <TextField_statusDefaultProperE
             swap={{
               iconCollection: <IconCollection_iconEthStatusDe classes={{ union: classes.union }} />,
             }}
@@ -125,7 +212,16 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
             text={{
               eGNameGPT: <div className={classes.eGNameGPT3}>0.00</div>,
             }}
-          />
+          /> */}
+            <input type="text" placeholder="⧫ 0.00" style={{
+                        backgroundColor: 'transparent',
+                        width: '500px', borderColor: 'transparent',
+                        borderWidth: '0px', fontSize: '16px',
+                        color: "white",
+                        opacity: "0.7", outline: 'none'
+                    }} 
+                    value={floorPrice}
+                    onChange={handlefloorPriceChange}/>
         </div>
         <div className={classes.frame27862}>
           <div className={classes.frame27863}>
@@ -134,11 +230,15 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
             </div>
             <div className={classes.chooseATagThatBestDescribesYou}>Choose a tag that best describes your model. </div>
           </div>
+
           <div className={classes.frame2788}>
+            <div onClick={handleartCate}>
             <Frame2680_statusDefault
+              clicked={artCate}
               swap={{
                 filterIcons: (
                   <FilterIcons_iconArt
+                  
                     className={classes.filterIcons}
                     swap={{
                       brush: <BrushIcon className={classes.icon3} />,
@@ -150,7 +250,11 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
                 video: <div className={classes.video}>Art</div>,
               }}
             />
+          </div>
+
+          <div onClick={handlesportCate}>
             <Frame2680_statusDefault
+              clicked={sportCate}
               swap={{
                 filterIcons: (
                   <FilterIcons_iconSport
@@ -165,7 +269,10 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
                 video: <div className={classes.video2}>Sport</div>,
               }}
             />
+            </div>
+            <div onClick={handleproductivityCate}>
             <Frame2680_statusDefault
+            clicked={productivityCate}
               swap={{
                 filterIcons: (
                   <FilterIcons_iconProductivity
@@ -180,7 +287,11 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
                 video: <div className={classes.video3}>Productivity</div>,
               }}
             />
+            </div>
+            <div onClick={handlecodingCate}>
             <Frame2680_statusDefault
+              clicked={codingCate}
+
               swap={{
                 filterIcons: (
                   <FilterIcons_iconCode
@@ -195,7 +306,10 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
                 video: <div className={classes.video4}>Coding</div>,
               }}
             />
+            </div>
+            <div onClick={handlemedicalCate}>
             <Frame2680_statusDefault
+              clicked={medicalCate}
               swap={{
                 filterIcons: (
                   <FilterIcons_iconMedical
@@ -210,7 +324,10 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
                 video: <div className={classes.video5}>Medical</div>,
               }}
             />
+            </div>
+            <div onClick={handlelegalCate}>
             <Frame2680_statusDefault
+              clicked={legalCate}
               swap={{
                 filterIcons: (
                   <FilterIcons_iconLegal
@@ -225,11 +342,14 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
                 video: <div className={classes.video6}>Legal</div>,
               }}
             />
+             </div>
           </div>
         </div>
         <div className={classes.frame2784}>
           <div className={classes.nFTThumbnailImage}>NFT thumbnail image</div>
-          <NftThumbnailImage_uploadedFals
+         
+         <div onClick={handleGenerateImage}>
+          {displayNFT == false ? (<NftThumbnailImage_uploadedFals
             classes={{ add_photo_alternate: classes.add_photo_alternate }}
             swap={{
               upload_file: <Upload_fileIcon className={classes.icon9} />,
@@ -239,7 +359,14 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
                 </div>
               ),
             }}
-          />
+          />) :
+            (<img src={NFTtokenPairs[0][0].toString()} style={{ width: '150%', height: '150%' }}></img>)
+        
+          }
+
+          {loadingNFT && <CircularProgress />}
+        </div>
+
         </div>
       </div>
       <div onClick={handleMintClick}>
@@ -255,7 +382,7 @@ export const MintModel: FC<Props> = memo(function MintModel(props = {onMint}) {
       <div className={classes.modelCard}></div>
       <div className={classes.frame2778}>
         <div className={classes.frame431}>
-          <div className={classes.frame27782}>
+          <div onClick={handleback} className={classes.frame27782}>
             <Frame2778Icon className={classes.icon12} />
           </div>
         </div>

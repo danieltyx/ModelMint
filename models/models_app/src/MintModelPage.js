@@ -11,6 +11,7 @@ interface Props {
 }
 
 export const MintModelPage: FC<Props> = memo(function App(props = {}) {
+  const history = useHistory();
   // Custom OKExChain mainnet provider
   const customOKExChainProvider = new ethers.providers.JsonRpcProvider({
     url: "https://exchainrpc.okex.org", // OKExChain mainnet node URL
@@ -59,8 +60,7 @@ export const MintModelPage: FC<Props> = memo(function App(props = {}) {
 
     console.log(`Sent token #${tokenId} to ${userAddress}!`);
  
-  const history = useHistory();
-    function handleMint() {
+    
     console.log("mint clikced");
     history.push('/models');
     //Nick: start your code here 

@@ -24,4 +24,5 @@ yarn-error.log*
 
 #keys 
 firebaseConfig.js
+.env
 .vercel

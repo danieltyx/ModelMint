@@ -16,6 +16,8 @@ import ReadFromFirestoreAll from './firebaseFunctions/ReadFromFirestoreAll';
 import MetaMaskSDK from '@metamask/sdk';
 import MyPopup from './MyPopup';
 import { Button, Stack } from 'react-bootstrap';
+import okxWeb3 from '@okwallet/extension';
+//console.log(okxWeb3);
 
 
 const db = firebase.firestore();
@@ -27,8 +29,8 @@ function GlobalNavbar({setShowPopup}) {
     // const [showPopup, setShowPopup] = useState(false);
     const [inputValue, setInputValue] = useState('');
 
-    const MMSDK = new MetaMaskSDK();
-    const ethereum = MMSDK.getProvider();
+    //const MMSDK = new MetaMaskSDK();
+    //const ethereum = MMSDK.getProvider();
 
 
     window.addEventListener('load', checkAuth);
@@ -62,30 +64,50 @@ function GlobalNavbar({setShowPopup}) {
       }
 
       
+    // async function handleConnect() {
+
+
+    //     await window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] })
+    //         .then(() => {
+    //             console.log('Wallet connected successfully.');
+    //             setWalletAddress(window.ethereum.selectedAddress);
+    //             console.log(window.ethereum.isConnected());
+    //             // console.log(walletAddress)
+    //             // console.log(window.ethereum.selectedAddress)
+
+    //         }).then(() => {
+    //             setShowPopup();
+    //         }).then(() => {
+    //             setCurrentUserWalletAddress(window.ethereum.selectedAddress);
+    //             console.log(getCurrentUserWalletAddress());
+    //             localStorage.setItem('authToken', getCurrentUserWalletAddress());
+    //         })
+    //         .catch((error) => {
+    //             console.error('Failed to connect wallet:', error);
+    //         });
+    // }
+
+
+
     async function handleConnect() {
-
-
-        await window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] })
-            .then(() => {
-                console.log('Wallet connected successfully.');
-                setWalletAddress(window.ethereum.selectedAddress);
-                console.log(window.ethereum.isConnected());
-                // console.log(walletAddress)
-                // console.log(window.ethereum.selectedAddress)
-
-            }).then(() => {
+        try {
+            const wallets = await window.okxwallet.requestWallets(true);
+            if (wallets && wallets.length > 0) {
+                const address = wallets[0].address[0].address;
+                console.log('Wallet connected successfully:', address);
+                setWalletAddress(address);
+                setCurrentUserWalletAddress(address);
+                localStorage.setItem('authToken', address);
+                localStorage.setItem('walletAddress', address);
                 setShowPopup();
-            }).then(() => {
-                setCurrentUserWalletAddress(window.ethereum.selectedAddress);
-                console.log(getCurrentUserWalletAddress());
-                localStorage.setItem('authToken', getCurrentUserWalletAddress());
-            })
-            .catch((error) => {
-                console.error('Failed to connect wallet:', error);
-            });
-
-
+            } else {
+                console.error('No wallets found');
+            }
+        } catch (error) {
+            console.error('Failed to connect wallet:', error);
+        }
     }
+    
     useEffect(() => {
         const storedWalletAddress = localStorage.getItem('walletAddress');
         if (storedWalletAddress) {

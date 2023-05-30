@@ -37,16 +37,22 @@ import { LayersIcon16 } from './LayersIcon16';
 import { LayersIcon17 } from './LayersIcon17';
 import { ModelCardFullImage_statusDefau } from './ModelCardFullImage_statusDefau/ModelCardFullImage_statusDefau';
 import { Vector_statusDefaultSizeBig } from './Vector_statusDefaultSizeBig/Vector_statusDefaultSizeBig';
+import { useHistory } from 'react-router-dom';
 
 interface Props {
   className?: string;
 }
 /* @figmaId 33:1831 */
 export const HomepageLoggedIn: FC<Props> = memo(function HomepageLoggedIn(props = {}) {
+  const history = useHistory();
+
+  function handleTryModel(){
+    history.push('./try-model?id=e1KRzyCozMn4DYWXzRxj');
+  }
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
       <div className={classes.nikuowwi_large_dark_chamber_wi}></div>
-      <div className={classes.rectangle346}></div>
+      <div onClick={handleTryModel} className={classes.rectangle346 }></div>
       <div className={classes.nikuowwi_website_UI_background}></div>
       <div className={classes.line161}></div>
       <div className={classes.frame2639}>

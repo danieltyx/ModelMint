@@ -23,7 +23,7 @@ import okxWeb3 from '@okwallet/extension';
 const db = firebase.firestore();
 
 
-function GlobalNavbar({setShowPopup}) {
+function GlobalNavbar({ setShowPopup }) {
 
     const [walletAddress, setWalletAddress] = useState('null');
     // const [showPopup, setShowPopup] = useState(false);
@@ -35,33 +35,41 @@ function GlobalNavbar({setShowPopup}) {
 
     window.addEventListener('load', checkAuth);
 
+    window.onload = function () {
+        if (getCurrentUserWalletAddress() == null) {
+            handleConnect();
+        }
+    };
+
     function checkAuth() {
         const authToken = localStorage.getItem('authToken');
         if (authToken) {
-          setCurrentUserWalletAddress(authToken);
-          console.log('authed', getCurrentUserWalletAddress());   
+            setCurrentUserWalletAddress(authToken);
+            console.log('authed', getCurrentUserWalletAddress());
         } else {
             console.log('not authed');
-        } 
-      }
+        }
+    }
 
 
     function handlePopupInputChange(event) {
         setInputValue(event.target.value);
-      }
+    }
 
-      function handleLogout() {
+    function handleLogout() {
         // perform logout logic
         console.log('logout');
         localStorage.removeItem('authToken');
         window.location.reload();
-      }
-    
-      function handlePopupSubmit() {
+    }
+
+    function handlePopupSubmit() {
         // Do something with the input value
         console.log(inputValue);
         // setShowPopup(false);
-      }
+    }
+
+
 
       
     // async function handleConnect() {
@@ -107,6 +115,28 @@ function GlobalNavbar({setShowPopup}) {
             console.error('Failed to connect wallet:', error);
         }
     }
+
+    // async function handleConnect() {
+    //     await window.ethereum.request({ method: 'wallet_requestPermissions', params: [{ eth_accounts: {} }] })
+    //         .then(() => {
+    //             console.log('Wallet connected successfully.');
+    //             setWalletAddress(window.ethereum.selectedAddress);
+    //             console.log(window.ethereum.isConnected());
+    //             // console.log(walletAddress)
+    //             // console.log(window.ethereum.selectedAddress)
+
+    //         }).then(() => {
+    //             setShowPopup();
+    //         }).then(() => {
+    //             setCurrentUserWalletAddress(window.ethereum.selectedAddress);
+    //             console.log(getCurrentUserWalletAddress());
+    //             localStorage.setItem('authToken', getCurrentUserWalletAddress());
+    //         })
+    //         .catch((error) => {
+    //             console.error('Failed to connect wallet:', error);
+    //         });
+
+    
     
     useEffect(() => {
         const storedWalletAddress = localStorage.getItem('walletAddress');
@@ -136,23 +166,23 @@ function GlobalNavbar({setShowPopup}) {
                     }} />
                 </div>
 
-                
+
                 {((localStorage.getItem('authToken') != null)) ? (
                     // display the first 4 and last 4 digits of the wallet address
                     <div >
                         <Stack direction="column" gap={3}>
-                        <a href="/models"> <h1 className="creator-space">Creator Space</h1></a>
-                        <a onClick={handleLogout}> <h1 className="creator-space">Log Out</h1></a>
-                    </Stack>
+                            <a href="/models"> <h1 className="creator-space">Creator Space</h1></a>
+                            <a onClick={handleLogout}> <h1 className="creator-space">Log Out</h1></a>
+                        </Stack>
 
 
                         {/* <p>{getCurrentUserWalletAddress().substring(0, 4) + "..." + getCurrentUserWalletAddress().substring(getCurrentUserWalletAddress().length - 4)}</p> */}
                     </div>
                 ) : (<img className="img2" src={connectLogo} onClick={handleConnect} alt="Logo" />)}
-                 {/* <Button variant="primary" onClick={setShowPopup}>
+                {/* <Button variant="primary" onClick={setShowPopup}>
                     Launch demo modal
                 </Button> */}
-             
+
 
             </div>
         </div>

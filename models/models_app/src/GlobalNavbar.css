@@ -95,10 +95,8 @@
   flex-grow: 0;
 }
 
-
 .img2 {
   /* Frame 2547 */
-
 
   box-sizing: border-box;
 
@@ -112,7 +110,7 @@
   padding: 12px 25px;
   gap: 10px;
 
-  width: 204.72px;
+  width: 250.72px; 
   height: 60.72px;
 
   /* background: #336F87; */
@@ -125,6 +123,7 @@
   flex-grow: 0;
 
 }
+
 
 .global-navbar-container2 .img2:hover {
   cursor: pointer;
@@ -193,4 +192,18 @@ opacity: 0.9;
 flex: none;
 order: 0;
 flex-grow: 0;
+}
+
+
+
+.error-message {
+  color: #9b1d20; /* This is a dark, rich red, less glaring than pure red */
+  background-color: #fdecea; /* A very light, soft red for the background */
+  border: 1px solid #9b1d20; /* A border that matches the text color */
+  border-radius: 5px; /* Rounded corners for a softer look */
+  padding: 10px; /* Some padding so the text isn't up against the edge of the box */
+  margin: 10px 0; /* Add some space above and below the message */
+  font-family: Arial, sans-serif; /* A clean, readable font */
+  font-size: 16px; /* A readable font size */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* A subtle shadow for a bit of depth */
 }

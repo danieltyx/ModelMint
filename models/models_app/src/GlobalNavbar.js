@@ -26,6 +26,7 @@ const db = firebase.firestore();
 function GlobalNavbar({ setShowPopup }) {
 
     const [walletAddress, setWalletAddress] = useState('null');
+    const [errorMessage, setErrorMessage] = useState(null);
     // const [showPopup, setShowPopup] = useState(false);
     const [inputValue, setInputValue] = useState('');
 
@@ -108,11 +109,14 @@ function GlobalNavbar({ setShowPopup }) {
                 localStorage.setItem('authToken', address);
                 localStorage.setItem('walletAddress', address);
                 setShowPopup();
+                setErrorMessage(null);
             } else {
                 console.error('No wallets found');
+                setErrorMessage('No wallets found. Please install and set up an OKX wallet.');
             }
         } catch (error) {
             console.error('Failed to connect wallet:', error);
+            setErrorMessage('Please ensure that OKX wallet is installed.');
         }
     }
 
@@ -182,6 +186,9 @@ function GlobalNavbar({ setShowPopup }) {
                 {/* <Button variant="primary" onClick={setShowPopup}>
                     Launch demo modal
                 </Button> */}
+
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+
 
 
             </div>

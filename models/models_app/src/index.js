@@ -8,7 +8,7 @@ import CreateModelPage from './CreateModelPage.js';
 import useModel from './useModel.js';
 import Setup from './Setup.js';
 import MintModelPage from './MintModelPage.js';
-
+import MarkerplaceMainPage  from './MarketPlaceMainPage.js';  
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
@@ -19,7 +19,8 @@ root.render(
      {/* <Navbar/> */}
      <Switch>
         <Route exact path="/models" component={ModelMainPage} />
-        <Route path="/marketplace" component={NewPage}/> 
+        <Route path="/marketplace" component={MarkerplaceMainPage}/> 
+        {/* New Page */}
         <Route path="/create-model" component={CreateModelPage}/>
         <Route path="/try-model" component={useModel}/>
         <Route path='/mint-model' component={MintModelPage}/>

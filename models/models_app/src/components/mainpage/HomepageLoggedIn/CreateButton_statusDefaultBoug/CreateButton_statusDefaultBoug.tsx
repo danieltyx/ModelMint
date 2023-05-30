@@ -17,7 +17,7 @@ interface Props {
 export const CreateButton_statusDefaultBoug: FC<Props> = memo(function CreateButton_statusDefaultBoug(props = {}) {
   function handleBuy(){
     console.log("Buy button clicked");
-    
+    //start payment process here
   }
   return (
     <button onClick={handleBuy} className={`${resets.clapyResets} ${props.classes?.root || ''} ${props.className || ''} ${classes.root}`}>

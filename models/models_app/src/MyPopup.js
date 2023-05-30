@@ -18,8 +18,10 @@ function MyPopup({show, handleShow,handleClose }) {
 
   function handleSubscribe() {
     setCurrentUserOpenAIKey(email);
-    // console.log(getCurrentUserOpenAIKey());
+    console.log('sending this to firebase:', getCurrentUserOpenAIKey());
+    
     WriteToFirestore('Users', window.ethereum.selectedAddress, { 
+      'created_date': new Date().toLocaleDateString(),
       'created_time': new Date().toLocaleTimeString(),
       'open_ai_key': getCurrentUserOpenAIKey(),
   });

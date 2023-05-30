@@ -6,6 +6,8 @@ import { CreateButton_statusDefaultSize2 } from '../CreateButton_statusDefaultSi
 import { IconCollection_iconBuyStatusDe } from '../IconCollection_iconBuyStatusDe/IconCollection_iconBuyStatusDe';
 import classes from './CreateButton_statusDefaultBoug.module.css';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import zokshUrl from '../../../../zoksh';
+
 interface Props {
   className?: string;
   classes?: {
@@ -16,8 +18,11 @@ interface Props {
 /* @figmaId 456:5698 */
 export const CreateButton_statusDefaultBoug: FC<Props> = memo(function CreateButton_statusDefaultBoug(props = {}) {
   function handleBuy(){
-    console.log("Buy button clicked");
+    // console.log("Buy button clicked");
     //start payment process here
+    // how to jump to a url
+    console.log("zokshUrl: ", zokshUrl());
+    window.location.href = zokshUrl();
   }
   return (
     <button onClick={handleBuy} className={`${resets.clapyResets} ${props.classes?.root || ''} ${props.className || ''} ${classes.root}`}>

@@ -7,7 +7,7 @@ async function use_model(my_prompt = "What is the name of the person who wrote t
 , my_model = "text-davinci-002", userOpenaiKey) {
 
   const configuration = new Configuration({
-    apiKey: openai_key,
+    apiKey: userOpenaiKey,
   });
   const openai = new OpenAIApi(configuration);
 
@@ -17,7 +17,7 @@ async function use_model(my_prompt = "What is the name of the person who wrote t
         model: my_model,
       });
 
-    console.log('usemodelOpenAIkey',openai_key);
+    console.log('usemodelOpenAIkey',userOpenaiKey);
 
     console.log(response.data.choices[0].text);
     return response.data.choices[0].text;

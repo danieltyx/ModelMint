@@ -47,8 +47,15 @@
 }
 
 .fiatPay {
-  background-color: white;
-  color: black;
-  font-size: 50px;
+  position: absolute;
+  margin-top: 60px;
+  left: 20px;
+  top: 80px; /* Adjust this value to position the button under the "Buy Now" button */
+  width: min-content;
+  height: min-content;
+}
+
+.fiatPayText {
+  font-size: 10px; /* Adjust this value as per your needs */
 }
 

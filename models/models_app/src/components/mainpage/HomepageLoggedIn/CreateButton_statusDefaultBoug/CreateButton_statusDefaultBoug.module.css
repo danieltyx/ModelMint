@@ -45,3 +45,10 @@
   width: min-content;
   height: min-content;
 }
+
+.fiatPay {
+  background-color: white;
+  color: black;
+  font-size: 50px;
+}
+

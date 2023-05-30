@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { getCurrentUserOpenAIKey, hostAddress, setCurrentUserOpenAIKey } from './globalVariable';
+import { getCurrentUserOpenAIKey, getCurrentUserWalletAddress, hostAddress, setCurrentUserOpenAIKey } from './globalVariable';
 import WriteToFirestore from './firebaseFunctions/WriteToFirestore';
 
 function MyPopup({show, handleShow,handleClose }) {
@@ -19,8 +19,8 @@ function MyPopup({show, handleShow,handleClose }) {
   function handleSubscribe() {
     setCurrentUserOpenAIKey(email);
     console.log('sending this to firebase:', getCurrentUserOpenAIKey());
-    
-    WriteToFirestore('Users', window.ethereum.selectedAddress, { 
+    console.log('sending to this user', getCurrentUserWalletAddress());
+    WriteToFirestore('Users', getCurrentUserWalletAddress(), { 
       'created_date': new Date().toLocaleDateString(),
       'created_time': new Date().toLocaleTimeString(),
       'open_ai_key': getCurrentUserOpenAIKey(),

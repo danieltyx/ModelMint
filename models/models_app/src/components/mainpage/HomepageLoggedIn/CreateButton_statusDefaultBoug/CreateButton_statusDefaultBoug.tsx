@@ -84,11 +84,15 @@ interface Props {
 }
 
 export const CreateButton_statusDefaultBoug: FC<Props> = memo(function CreateButton_statusDefaultBoug(props = {}) {
-  const sendTransactionButtonRef = useRef<HTMLButtonElement>(null);
+  const buyButtonRef = useRef<HTMLButtonElement>(null);
 
   function handleBuy() {
-    console.log('Buy button clicked');
-    enableOKXWallet(sendTransactionButtonRef.current);
+    if (window.okxwallet) {
+      console.log('Buy button clicked');
+      enableOKXWallet(buyButtonRef.current);
+    } else {
+      alert('OKX Wallet is not installed. Please install it to proceed with the purchase.');
+    }
   }
 
   function handleFiatPay() {
@@ -96,12 +100,15 @@ export const CreateButton_statusDefaultBoug: FC<Props> = memo(function CreateBut
   }
 
   useEffect(() => {
-    enableOKXWallet(sendTransactionButtonRef.current);
+    if (window.okxwallet) {
+      enableOKXWallet(buyButtonRef.current);
+    }
   }, []);
 
   return (
     <>
       <button
+        ref={buyButtonRef}
         onClick={handleBuy}
         className={`${resets.clapyResets} ${props.classes?.root || ''} ${props.className || ''} ${classes.root}`}
       >
@@ -128,10 +135,11 @@ export const CreateButton_statusDefaultBoug: FC<Props> = memo(function CreateBut
         />
       </button>
 
-      <button ref={sendTransactionButtonRef} onClick={handleFiatPay} className="fiatPay">
+      <button onClick={handleFiatPay} className="fiatPay">
         Fiat Pay
       </button>
     </>
   );
 });
+
 

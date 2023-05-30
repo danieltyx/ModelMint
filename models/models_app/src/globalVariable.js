@@ -19,3 +19,8 @@ export function setCurrentUserOpenAIKey(key) {
 export function getCurrentUserOpenAIKey() {
   return _currentUserOpenAIKey;
 }
+
+const hostAddress = "localhost";
+
+export {hostAddress};
+

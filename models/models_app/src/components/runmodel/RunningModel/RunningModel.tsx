@@ -12,7 +12,7 @@ import { Thumb_up_statusDefault } from './Thumb_up_statusDefault/Thumb_up_status
 import { UnionIcon } from './UnionIcon';
 import { useContext } from 'react';
 import { modelInputContext } from '../../../Contexts/modelInputContext';
-import {getCurrentUserOpenAIKey, getCurrentUserWalletAddress} from '../../../globalVariable';
+import {getCurrentUserOpenAIKey, getCurrentUserWalletAddress, hostAddress} from '../../../globalVariable';
 import ReadFromfirestore from '../../../firebaseFunctions/ReadFromFirestore.js';
 
 
@@ -70,7 +70,7 @@ async function handleRunModel(url,data){
       setkey(data.open_ai_key);
       console.log('key: ', key);
       console.log('kedata.open_ai_key: ', data.open_ai_key);
-      handleRunModel(`http://localhost:4003/trymodel${data.open_ai_key.trim()}`,{
+      handleRunModel(`http://${hostAddress}:4003/trymodel${data.open_ai_key.trim()}`,{
         "model_id": props.modelId, 
         "prompt": newPostContent
       } );

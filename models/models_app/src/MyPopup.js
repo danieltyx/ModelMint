@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { getCurrentUserOpenAIKey, setCurrentUserOpenAIKey } from './globalVariable';
+import { getCurrentUserOpenAIKey, hostAddress, setCurrentUserOpenAIKey } from './globalVariable';
 import WriteToFirestore from './firebaseFunctions/WriteToFirestore';
 
 function MyPopup({show, handleShow,handleClose }) {
@@ -18,8 +18,10 @@ function MyPopup({show, handleShow,handleClose }) {
 
   function handleSubscribe() {
     setCurrentUserOpenAIKey(email);
-    // console.log(getCurrentUserOpenAIKey());
+    console.log('sending this to firebase:', getCurrentUserOpenAIKey());
+    
     WriteToFirestore('Users', window.ethereum.selectedAddress, { 
+      'created_date': new Date().toLocaleDateString(),
       'created_time': new Date().toLocaleTimeString(),
       'open_ai_key': getCurrentUserOpenAIKey(),
   });
@@ -27,7 +29,7 @@ function MyPopup({show, handleShow,handleClose }) {
   async function handleSetupKey() {
     try {
       // var data;
-      var requestadd = `http://localhost:4003/setkey${getCurrentUserOpenAIKey()}`;
+      var requestadd = `http://${hostAddress}:4003/setkey${getCurrentUserOpenAIKey()}`;
       const response = await fetch(requestadd,{
         method: 'POST'
       });

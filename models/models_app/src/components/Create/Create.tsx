@@ -36,7 +36,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { useHistory } from 'react-router-dom';
 import WriteToFirestore_UID from '../../firebaseFunctions/WriteToFirestore_UID.js';
-import {getCurrentUserWalletAddress} from '../../globalVariable.js';
+import {getCurrentUserWalletAddress,hostAddress} from '../../globalVariable.js';
 registerPlugin(
   FilePondPluginImageExifOrientation,
   FilePondPluginImagePreview,
@@ -131,11 +131,9 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
 
   async function handleLookup() {
     try {//${modelid}
-      //http://localhost:4003/lookupft-TxtaCcHdFwlN51KAZFkdkBAf have id
-      //http://localhost:4003/lookupft-0PyMlnD3Yq7Gnj2xLLpOl7KG  no id
       console.log('modelid', modelid);
       // var data;
-      var requestadd = modelid === "Have not created yet" ? `http://localhost:4003/lookupft-kqp2Xtf0LoPFGekt2iZEoyvq`: `http://localhost:4003/lookup${modelid}`;
+      var requestadd = modelid === "Have not created yet" ? `http://${hostAddress}:4003/lookupft-kqp2Xtf0LoPFGekt2iZEoyvq`: `http://${hostAddress}:4003/lookup${modelid}`;
       const response = await fetch(requestadd,{
         method: 'POST'
       });
@@ -158,6 +156,8 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
       console.error("Error looking up model status:", error);
     }
   }
+
+  const server_upload_add =  `http://${hostAddress}:4003/upload`;
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
       <div className={classes.frame2659}>
@@ -300,7 +300,7 @@ export const Create: FC<Props> = memo(function Create(props = {}) {
         onupdatefiles={settrainFile}
         instantUpload={false}
         allowMultiple={false}
-        server="http://localhost:4003/upload"
+       server= {server_upload_add}
         name="file"
         labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
         onprocessfile={(error, file) => {

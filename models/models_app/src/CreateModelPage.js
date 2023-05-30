@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import classes from './App.module.css';
 import resets from './components/_resets.module.css';
 import { Create } from './components/Create/Create.tsx';
-import { getCurrentUserOpenAIKey } from "./globalVariable";
+import { getCurrentUserOpenAIKey, hostAddress} from "./globalVariable";
 
 function CreateModelPage()
 {
@@ -16,7 +16,7 @@ function CreateModelPage()
   async function handleSetupKey() {
     try {
       // var data;
-      var requestadd = `http://localhost:4003/setkey${getCurrentUserOpenAIKey()}`;
+      var requestadd = `http://${hostAddress}:4003/setkey${getCurrentUserOpenAIKey()}`;
       const response = await fetch(requestadd,{
         method: 'POST'
       });

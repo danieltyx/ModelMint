@@ -19,6 +19,7 @@ root.render(
      {/* <Navbar/> */}
      <Switch>
         <Route exact path="/models" component={ModelMainPage} />
+        {/* <Route path="/" component={MarkerplaceMainPage}/>  */}
         <Route path="/marketplace" component={MarkerplaceMainPage}/> 
         {/* New Page */}
         <Route path="/create-model" component={CreateModelPage}/>

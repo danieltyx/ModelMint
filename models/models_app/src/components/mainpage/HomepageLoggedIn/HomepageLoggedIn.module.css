@@ -1320,6 +1320,11 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.rectangle346:hover {
+  cursor: pointer;
+}
+
 .nikuowwi_website_UI_background {
   opacity: 0.1;
   position: absolute;

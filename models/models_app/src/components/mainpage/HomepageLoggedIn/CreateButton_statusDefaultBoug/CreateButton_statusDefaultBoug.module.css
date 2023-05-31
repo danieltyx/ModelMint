@@ -61,12 +61,12 @@
 
 .sponsorImageContainer {
   position: absolute;
-  left: 20px;  /* Adjust this value to move the image horizontally */
-  top: 140px;  /* Adjust this value to move the image vertically */
+  left: 1000px;  /* Adjust this value to move the image horizontally */
+  top: 2030px;  /* Adjust this value to move the image vertically */
 }
 
 .sponsorclass {
-  width: 150px; /* Adjust to make the image larger or smaller */
+  width: 550px; /* Adjust to make the image larger or smaller */
   height: auto; /* Keep the aspect ratio of the image */
 }
 

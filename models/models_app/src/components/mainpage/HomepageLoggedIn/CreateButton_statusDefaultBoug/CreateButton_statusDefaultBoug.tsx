@@ -8,6 +8,7 @@ import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { enableOKXWallet } from './okxIntegration';
 import zokshUrl from '../../../../zoksh';
 import sponsorImage from './sponsor.png';
+import fullsponsorImage from './fullsponsor.png'
 
 interface Props {
   className?: string;
@@ -105,6 +106,10 @@ export const CreateButton_statusDefaultBoug: FC<Props> = memo(function CreateBut
 
       <div className={classes.sponsorImageContainer}>
       <img src={sponsorImage} alt="" className={classes.sponsorclass} />
+</div>
+
+      <div className={classes.fullsponsorImageContainer}>
+      <img src={fullsponsorImage} alt="" className={classes.fullsponsorclass} />
 </div>
 
     </>

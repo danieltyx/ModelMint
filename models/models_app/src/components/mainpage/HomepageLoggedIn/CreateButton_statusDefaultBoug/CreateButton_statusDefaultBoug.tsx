@@ -7,6 +7,7 @@ import classes from './CreateButton_statusDefaultBoug.module.css';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { enableOKXWallet } from './okxIntegration';
 import zokshUrl from '../../../../zoksh';
+import sponsorImage from './sponsor.png';
 
 interface Props {
   className?: string;
@@ -95,11 +96,17 @@ export const CreateButton_statusDefaultBoug: FC<Props> = memo(function CreateBut
             ),
           }}
           text={{
-            createAModel: <div className={`${classes.createAModel} ${classes.fiatPayText}`}>buy ETH through card<br /> powered by Zoksh Pay</div>,
+            createAModel: <div className={`${classes.createAModel} ${classes.fiatPayText}`}>buy ETH through card<br /> powered by Zoksh Pay
+            </div>,
           }}
           
         />
       </button>
+
+      <div className={classes.sponsorImageContainer}>
+      <img src={sponsorImage} alt="" className={classes.sponsorclass} />
+</div>
+
     </>
   );
 });

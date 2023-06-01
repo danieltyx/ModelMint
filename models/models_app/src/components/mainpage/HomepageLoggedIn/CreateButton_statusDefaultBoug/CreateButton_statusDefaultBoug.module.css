@@ -66,14 +66,14 @@
 }
 
 .sponsorclass {
-  width: 550px; /* Adjust to make the image larger or smaller */
+  width: 350px; /* Adjust to make the image larger or smaller */
   height: auto; /* Keep the aspect ratio of the image */
 }
 
 .fullsponsorImageContainer {
   position: absolute;
-  left: 300px;  /* Adjust this value to move the image horizontally */
-  top: 730px;  /* Adjust this value to move the image vertically */
+  left: 500px;  /* Adjust this value to move the image horizontally */
+  top: 630px;  /* Adjust this value to move the image vertically */
 }
 
 .fullsponsorclass {

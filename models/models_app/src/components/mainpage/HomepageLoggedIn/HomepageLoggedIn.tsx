@@ -47,7 +47,7 @@ export const HomepageLoggedIn: FC<Props> = memo(function HomepageLoggedIn(props 
   const history = useHistory();
 
   function handleTryModel(){
-    history.push('./try-model?id=e1KRzyCozMn4DYWXzRxj');
+    history.push('./try-model?id=9K6Q1AJHosMfPgHnPvEj');
   }
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>

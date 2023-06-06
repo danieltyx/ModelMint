@@ -49,7 +49,7 @@ async function handleRunModel(url,data){
 
     // If the response was ok, retrieve and handle the JSON data
     const json = await response.json();
-    console.log(json.response.trim());
+    console.log("results",json.response.trim());
     setModelOutput(json.response.trim());
   } catch (error) {
     console.error("There was a problem with the fetch operation: " + error.message);

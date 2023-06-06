@@ -10,7 +10,7 @@
     "@fontsource/red-rose": "^4.5.11",
     "@metamask/sdk": "^0.2.4",
     "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.13.1",
+    "@mui/material": "^5.13.3",
     "@okwallet/extension": "^1.0.17",
     "@rainbow-me/rainbowkit": "^1.0.0",
     "@rainbow-me/rainbowkit-siwe-next-auth": "^0.2.0",

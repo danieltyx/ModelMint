@@ -10,14 +10,14 @@ async function use_model(my_prompt = "What is the name of the person who wrote t
     apiKey: userOpenaiKey,
   });
   const openai = new OpenAIApi(configuration);
-
+  console.log('usemodelOpenAIkey',userOpenaiKey);
   try{
+    console.log('1');
     const response = await openai.createCompletion({
         prompt: my_prompt,
         model: my_model,
       });
-
-    console.log('usemodelOpenAIkey',userOpenaiKey);
+    console.log('2');
 
     console.log(response.data.choices[0].text);
     return response.data.choices[0].text;
